@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Zingtv" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_zingtv</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Zingtv</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Zingtv</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Zingtv</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Zingtv</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent.Zingtv</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_zingtv</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_zingtv</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Zingtv</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/apptheme_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/apptheme_activated_background_holo_light</item>
+        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
+        <item name="android:ratingBarStyle">@style/RatingBarAppTheme</item>
+        <item name="android:buttonStyle">@style/zm_button</item>
+        <item name="android:imageButtonStyle">@style/zm_ImageButtonAppTheme</item>
+           <item name="android:dialogTheme">@style/CustomDialogTheme</item>
+    </style>
+
+    <style name="Theme.Zingtv1" parent="@style/Theme.Zingtv">
+        <item name="android:homeAsUpIndicator">@drawable/ic_drawer_light</item>
+    </style>
+
+    <style name="ActionBar.Solid.Zingtv" parent="@android:style/Widget.Holo.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_zingtv</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_zingtv</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_zingtv</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Zingtv</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Zingtv" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_zingtv</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Zingtv</item>
+    </style>
+
+    <style name="PopupMenu.Zingtv" parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_zingtv</item>
+    </style>
+
+    <style name="DropDownListView.Zingtv" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_zingtv</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Zingtv" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_zingtv</item>
+    </style>
+
+    <style name="DropDownNav.Zingtv" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_zingtv</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_zingtv</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_zingtv</item>
+    </style>
+
+    <style name="ProgressBar.Zingtv" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_zingtv</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Zingtv" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_zingtv</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Zingtv.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Zingtv</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Zingtv</item>
+    </style>
+
+    <style name="SeekBarAppTheme" parent="android:Widget.Holo.Light.SeekBar">
+        <item name="android:progressDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
+    </style>
+
+    <style name="in_left_out_left_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_left</item>
+    </style>
+
+    <style name="in_right_out_right_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="zm_button" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/bnt_custom</item>
+    </style>
+
+    <style name="zm_ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/bnt_custom</item>
+    </style>
+    <!-- rating bar -->
+
+    <style name="RatingBarAppTheme" parent="android:Widget.Holo.Light.RatingBar">
+        <item name="android:progressDrawable">@drawable/apptheme_ratingbar_full_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/apptheme_ratingbar_full_holo_light</item>
+    </style>
+      <style name="CustomDialogTheme" parent="@android:style/Theme.Holo.Light.Dialog">
+   
+    </style>
+
+</resources>

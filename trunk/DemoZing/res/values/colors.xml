@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_sliding_menu">#2d2f2e</color>
+    <color name="line_menu">#75ad02</color>
+    <color name="line_menu_group">#76af01</color>
+    <color name="bg_login">#85c62b</color>
+    <color name="category">#c2c3be</color>
+    <color name="bg_actionbar">#1f2226</color>
+	<color name="text_green">#77b203</color>
+    <color name="gray">#1f2226</color>
+</resources>

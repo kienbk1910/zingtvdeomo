@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rating_bar_bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:text="Đánh giá"
+        android:textColor="@color/text_green"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/text_green" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="15dp" >
+
+        <RatingBar
+            android:id="@+id/ratingBar1"
+            style="@style/RatingBarAppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            style="@style/RatingBarAppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:numStars="5" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eee" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bnt_custom"
+            android:text="Bỏ qua"
+            android:textColor="#B8B8A2"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#eee" />
+
+        <Button
+               android:id="@+id/btn_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bnt_custom"
+            android:gravity="center"
+            android:text="Đồng ý"
+            android:textColor="#B8B8A2"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

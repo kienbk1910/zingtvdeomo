@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/video_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <FrameLayout
+        android:id="@+id/videoSurfaceContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <SurfaceView
+            android:id="@+id/videoSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress_bar" />
+    </FrameLayout>
+
+    <TabHost
+        android:layout_below="@id/videoSurfaceContainer"
+        android:id="@+id/TabHost01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" > <!-- TabWidget used to creat tabs -->
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                    android:showDividers="none"
+                android:layout_height="wrap_content" >
+            </TabWidget> <!-- container of tabs -->
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" > 
+             <android.support.v4.view.ViewPager
+				    android:background="#F4F4F3"
+				    xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:id="@+id/pager"
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" />
+                
+                 />
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</RelativeLayout>
