@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+
+        <include layout="@layout/slider" />
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="10dp"
+            android:text="Video Mới Nổi Bật"
+            style="@style/category_text"/>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <include
+                    android:id="@+id/video0"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video1"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video2"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video3"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video4"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video5"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video6"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video7"
+                    layout="@layout/video_small_item" />
+
+                <include
+                    android:id="@+id/video8"
+                    layout="@layout/video_small_item" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:text="Tin Tức"
+            style="@style/category_text"/>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="15dp"
+            android:text="Bóng Đá"
+             style="@style/category_text"/>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/images" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="15dp"
+            android:text="TV SHOW"
+            style="@style/category_text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/images1" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/images1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/images1" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/images1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
