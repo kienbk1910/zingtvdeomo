@@ -12,6 +12,7 @@ import com.example.demozing.model.TypeCategory;
 
 
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -72,14 +73,11 @@ public class SlidingFragment extends Fragment {
 					
 				}
 				if(arg2==1){
-			
-//					MainFragment fragment=(MainFragment) getActivity().getSupportFragmentManager().findFragmentByTag("kien");
-//					if(fragment ==null){
-//						Log.d("kienbk1910","null");
-//						fragment= ;
-//					}
 					switchFragment(new MainFragment());
 				//	closeMenu();
+				}
+				if(arg2==14){
+					logout();
 				}
 			}
 			
@@ -88,15 +86,7 @@ public class SlidingFragment extends Fragment {
 	
 		return root;
 	}
-	private void closeMenu() {
-		if (getActivity() == null)
-			return;
-
-		if (getActivity() instanceof MainActivity) {
-			MainActivity ra = (MainActivity) getActivity();
-			ra.toggleMenu();
-		}
-	}
+	
 	private void switchFragment(Fragment fragment) {
 		if (getActivity() == null)
 			return;
@@ -106,5 +96,15 @@ public class SlidingFragment extends Fragment {
 			ra.switchContent(fragment);
 		}
 	}
+	private void logout(){
+		if (getActivity() == null)
+			return;
+
+		if (getActivity() instanceof MainActivity) {
+			MainActivity ra = (MainActivity) getActivity();
+			ra.logout();
+		}
+	}
+
 
 }

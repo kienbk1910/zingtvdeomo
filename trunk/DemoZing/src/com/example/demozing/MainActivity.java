@@ -14,6 +14,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -158,6 +159,12 @@ context=this;
 		// TODO Auto-generated method stub
 		getWindow().setWindowAnimations(R.style.in_left_out_left_animation);
 		super.onStart();
+	}
+	public void logout(){
+		Editor editor = getSharedPreferences(Constants.KEY_STORE, Context.MODE_PRIVATE).edit();
+	     editor.putBoolean(Constants.IS_LOGIN, false);
+	     editor.commit(); 
+		finish();
 	}
 	 public  boolean hasConnection() {
 	
