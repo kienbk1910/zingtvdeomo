@@ -242,7 +242,7 @@ public class PlayVideoActivity extends FragmentActivity implements SurfaceHolder
     public void toggleFullScreen() {
     	int configuration=getResources().getConfiguration().orientation;
     	if(configuration != Configuration.ORIENTATION_LANDSCAPE)
-    	setRequestedOrientation (ActivityInfo. SCREEN_ORIENTATION_LANDSCAPE);
+    		setRequestedOrientation (ActivityInfo. SCREEN_ORIENTATION_LANDSCAPE);
     	else
     	 	setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         
@@ -311,7 +311,7 @@ public class PlayVideoActivity extends FragmentActivity implements SurfaceHolder
 	             
 	             videoHolder.setFixedSize(screenWidth, (int) (screenWidth*screenProportion));
 	         }
-		
+	
 	}
 
 
