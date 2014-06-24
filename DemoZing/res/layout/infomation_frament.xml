@@ -68,6 +68,7 @@
 
                 <com.example.demozing.DrawableAlignedButton
                     android:id="@+id/rate"
+                     android:textColor="#AFAFAE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/rate_star_med_off"
@@ -89,6 +90,7 @@
                     android:indeterminateDrawable="@drawable/progress_bar" />
 
                 <com.example.demozing.DrawableAlignedButton
+                     android:textColor="#AFAFAE"
                     android:id="@+id/like"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

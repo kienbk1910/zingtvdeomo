@@ -8,4 +8,6 @@
     <color name="bg_actionbar">#1f2226</color>
 	<color name="text_green">#77b203</color>
     <color name="gray">#1f2226</color>
+    <color name="comment_text">#ABAB9B</color>
+    <color name="nickname">#89897C</color>
 </resources>
