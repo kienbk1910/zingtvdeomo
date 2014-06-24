@@ -7,29 +7,26 @@ package com.example.demozing;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.androidquery.AQuery;
-import com.example.demozing.model.Video;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.widget.AdapterView.OnItemClickListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import com.androidquery.AQuery;
+import com.example.demozing.model.Video;
 
 /**
  * @author kienbk1910
