@@ -18,9 +18,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,11 +50,23 @@ public class CommentFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.comment_frament, null);
+		View headerList = ((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.comment_header, null);
+
 		listView= (ListView) root.findViewById(R.id.list);
+		listView.addHeaderView(headerList);
 		comments = new ArrayList<Comment>();
-	
 		adapter= new ListCommentAdaper(getActivity(), 0, comments);
 		listView.setAdapter(adapter);
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Log.d("kienbk1910", ""+position);
+			}
+		});
 		new LoadCommentTask().execute();
 		return root;
 	}
