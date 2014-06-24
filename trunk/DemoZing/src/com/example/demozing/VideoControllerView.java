@@ -424,12 +424,14 @@ public class VideoControllerView extends FrameLayout {
         if (mRoot == null || mFullscreenButton == null || mPlayer == null) {
             return;
         }
-        
+       
         if (mPlayer.isFullScreen()) {
-            mFullscreenButton.setImageResource(R.drawable.ic_media_fullscreen_shrink);
+            mFullscreenButton.setImageResource(R.drawable.ic_media_expand);
+            Log.d("kienbk1910", "full");
         }
         else {
-            mFullscreenButton.setImageResource(R.drawable.ic_media_fullscreen_stretch);
+            mFullscreenButton.setImageResource(R.drawable.ic_media_collapse);
+            Log.d("kienbk1910", " no full");
         }
     }
 
@@ -450,7 +452,7 @@ public class VideoControllerView extends FrameLayout {
         if (mPlayer == null) {
             return;
         }
-        
+        updateFullScreen();
         mPlayer.toggleFullScreen();
     }
 

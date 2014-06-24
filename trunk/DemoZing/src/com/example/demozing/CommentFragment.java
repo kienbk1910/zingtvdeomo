@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.androidquery.AQuery;
 import com.example.demozing.ListItemCategory.ListCustomAdaper.ViewHolder;
+import com.example.demozing.dialog.CommentDialog;
+import com.example.demozing.dialog.RateDialog;
 import com.example.demozing.model.Comment;
 import com.example.demozing.model.Video;
 
@@ -25,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -51,20 +54,19 @@ public class CommentFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.comment_frament, null);
 		View headerList = ((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.comment_header, null);
-
+		Button comment = (Button) headerList.findViewById(R.id.comment);
 		listView= (ListView) root.findViewById(R.id.list);
-		listView.addHeaderView(headerList);
+		listView.addHeaderView(headerList,null,false);
 		comments = new ArrayList<Comment>();
 		adapter= new ListCommentAdaper(getActivity(), 0, comments);
 		listView.setAdapter(adapter);
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
+		comment.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.d("kienbk1910", ""+position);
+				showCommentDialog();
 			}
 		});
 		new LoadCommentTask().execute();
@@ -155,5 +157,9 @@ public class CommentFragment extends Fragment {
 			super.onPostExecute(result);
 		}
 		
+	}
+	private void showCommentDialog(){
+		CommentDialog dialog = new CommentDialog();
+		dialog.show(getFragmentManager(), "ratedialog");
 	}
 }

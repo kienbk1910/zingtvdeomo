@@ -15,11 +15,13 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,8 +63,9 @@ public class PlayVideoActivity extends FragmentActivity implements
 	ViewPager pager;
 	TabsHostPagerAdapter adapter;
 	TabHost myTabHost;
+	int buffer=0;
 	private ShareActionProvider mShareActionProvider;
-
+boolean isfullScreen;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,7 +94,7 @@ public class PlayVideoActivity extends FragmentActivity implements
 		setupTab(new TextView(this), "Thông tin");
 		setupTab(new TextView(this), "Liên quan");
 		setupTab(new TextView(this), "Bình luận");
-
+		isfullScreen=false;
 		myTabHost.setCurrentTab(1);
 		myTabHost.setCurrentTab(0);
 		adapter = new TabsHostPagerAdapter(getSupportFragmentManager());
@@ -134,17 +137,53 @@ public class PlayVideoActivity extends FragmentActivity implements
 				return false;
 			}
 		});
+		
+
 		videoHolder = videoSurface.getHolder();
 		resizeVideo();
 		videoHolder.addCallback(this);
 
+	}
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.d("kienbk1910", "onresume");
+	     if(player!= null && player.isPlaying())
+	    	 player.start();
+		super.onResume();
+	}
+
+	// Implement SurfaceHolder.Callback
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		Log.d("kienbk1910", "surfaceChanged");
+
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		Log.d("kienbk1910", "surfaceCreated");
+
 		player = new MediaPlayer();
+		player.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
+			
+			@Override
+			public void onBufferingUpdate(MediaPlayer mp, int percent) {
+				// TODO Auto-generated method stub
+				buffer=percent;
+			}
+		});
+		player.setScreenOnWhilePlaying(true);
 		controller = new VideoControllerView(this);
 
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(this, Uri
-					.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
+					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/c216a2a72542d13a6359f98b79f81460/53a98e17/2014/0621/97/9730caa4089361d2c9c27f99798e83c1.mp4?format=f360&device=web_flash&start=0"));
 			player.setOnPreparedListener(this);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -155,24 +194,17 @@ public class PlayVideoActivity extends FragmentActivity implements
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	// Implement SurfaceHolder.Callback
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
 		player.setDisplay(holder);
 		player.prepareAsync();
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
+		Log.d("kienbk1910", "surfaceDestroyed");
+		if(player.isPlaying())
+			player.stop();
 		player.release();
+		player = null;
 	}
 
 	// End SurfaceHolder.Callback
@@ -186,6 +218,7 @@ public class PlayVideoActivity extends FragmentActivity implements
 		player.start();
 		progressBar.setVisibility(View.GONE);
 	}
+	
 
 	// End MediaPlayer.OnPreparedListener
 
@@ -207,7 +240,7 @@ public class PlayVideoActivity extends FragmentActivity implements
 
 	@Override
 	public int getBufferPercentage() {
-		return 0;
+		return buffer;
 	}
 
 	@Override
@@ -242,16 +275,18 @@ public class PlayVideoActivity extends FragmentActivity implements
 
 	@Override
 	public boolean isFullScreen() {
-		return false;
+		return isfullScreen;
 	}
 
 	@Override
 	public void toggleFullScreen() {
 		int configuration = getResources().getConfiguration().orientation;
-		if (configuration != Configuration.ORIENTATION_LANDSCAPE)
+		if (configuration != Configuration.ORIENTATION_LANDSCAPE){
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		else
+		}
+		else{
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 
 	}
 
@@ -290,8 +325,10 @@ public class PlayVideoActivity extends FragmentActivity implements
 	 */
 	@Override
 	protected void onStart() {
+		Log.d("kienbk1910", "onstart");
 		// TODO Auto-generated method stub
 		getWindow().setWindowAnimations(R.style.in_right_out_right_animation);
+
 		super.onStart();
 	}
 
@@ -325,6 +362,7 @@ public class PlayVideoActivity extends FragmentActivity implements
 					WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			getActionBar().hide();
 			videoHolder.setFixedSize(screenWidth, screenHeight);
+			isfullScreen=true;
 		} else if (configuration == Configuration.ORIENTATION_PORTRAIT) {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			getWindow().setFlags(
@@ -333,7 +371,7 @@ public class PlayVideoActivity extends FragmentActivity implements
 
 			getActionBar().show();
 			float screenProportion = (float) screenWidth / (float) screenHeight;
-
+			isfullScreen=false;
 			videoHolder.setFixedSize(screenWidth,
 					(int) (screenWidth * screenProportion));
 		}
@@ -376,6 +414,25 @@ public class PlayVideoActivity extends FragmentActivity implements
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onPause()
+	 */
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		Log.d("kienbk1910", "onPause");
+		player.pause();
+		super.onPause();
+	}
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onDestroy()
+	 */
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		Log.d("kienbk1910", "onDestroy");
+		super.onDestroy();
+	}
 	private Intent getDefaultIntent() {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.putExtra(Intent.EXTRA_TEXT, "Whatever message you want to share");
