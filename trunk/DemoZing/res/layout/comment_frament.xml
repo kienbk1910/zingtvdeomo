@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="10dp" >
     <ListView
+              android:choiceMode="singleChoice"
         android:id="@+id/list" 
         android:dividerHeight="10dp"
         android:layout_width="match_parent"
