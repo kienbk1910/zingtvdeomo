@@ -41,7 +41,7 @@ public class ShareChooserDialog extends DialogFragment{
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
-	View view = inflater.inflate(R.layout.share_chooser_dialgo, container);
+	View view = inflater.inflate(R.layout.share_chooser_dialog, container);
 	gridView=(GridView)view.findViewById(R.id.gridview);
 	getDialog().setTitle("Chia sẽ");
 	 int divierId = getDialog().getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
