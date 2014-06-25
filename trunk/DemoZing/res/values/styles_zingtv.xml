@@ -119,7 +119,11 @@
     </style>
       <style name="CustomDialogTheme" parent="@android:style/Theme.Holo.Light.Dialog">
                <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
-          
+             <item name="android:windowTitleStyle">@style/dialog_title_style</item>
     </style>
+<style name="dialog_title_style" parent="android:Widget.TextView">
+    <item name="android:textColor">@color/text_green</item>
+    <item name="android:textSize">20sp</item>
 
+</style>
 </resources>

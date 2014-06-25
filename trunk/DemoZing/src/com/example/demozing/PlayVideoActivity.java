@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.example.demozing.R;
+import com.example.demozing.dialog.ShareChooserDialog;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -183,7 +184,7 @@ boolean isfullScreen;
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(this, Uri
-					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/c216a2a72542d13a6359f98b79f81460/53a98e17/2014/0621/97/9730caa4089361d2c9c27f99798e83c1.mp4?format=f360&device=web_flash&start=0"));
+					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/4b4b99222aa7e46b7d93ba0dcd51fd3d/53aa3e24/2014/0623/22/1cc2afeb8860d5b56a7d919ccde03145.mp4?format=f360&device=web_flash&start=0"));
 			player.setOnPreparedListener(this);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -339,6 +340,9 @@ boolean isfullScreen;
 
 			finish();
 			return true;
+		case R.id.action_share:
+			showChooser();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -401,10 +405,7 @@ boolean isfullScreen;
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.menu_play_video_activity, menu);
 		// share action
-		MenuItem shareItem = menu.findItem(R.id.action_share);
-		mShareActionProvider = (ShareActionProvider) shareItem
-				.getActionProvider();
-		mShareActionProvider.setShareIntent(getDefaultIntent());
+		
 		// search action
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
@@ -438,5 +439,9 @@ boolean isfullScreen;
 		intent.putExtra(Intent.EXTRA_TEXT, "Whatever message you want to share");
 		intent.setType("text/plain");
 		return intent;
+	}
+	private void showChooser(){
+		ShareChooserDialog dialog = new ShareChooserDialog();
+		dialog.show(getSupportFragmentManager(), "chooser");
 	}
 }
