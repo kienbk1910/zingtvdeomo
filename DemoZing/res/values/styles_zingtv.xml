@@ -72,6 +72,7 @@
         <item name="android:background">@drawable/spinner_background_ab_zingtv</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_zingtv</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_zingtv</item>
+ 
     </style>
 
     <style name="ProgressBar.Zingtv" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
