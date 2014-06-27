@@ -20,7 +20,10 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int index) {
  
             // Top Rated fragment activity
-            return new ListItemCategory();
+    	if(index==0)
+            return new ProgramList();
+    	else
+            return new VideoList();
      
     }
  

@@ -24,13 +24,13 @@ public class TabsHostPagerAdapter extends FragmentStatePagerAdapter {
 		case 0:
 			return new InfomatinFragment();
 		case 1:
-			return new ListItemCategory();
+			return new ProgramList();
 	
 		case 2:
 			return new CommentFragment();
 
 		}
-		return new ListItemCategory();
+		return new ProgramList();
 
     }
  
