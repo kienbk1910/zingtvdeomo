@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.androidquery.AQuery;
-import com.example.demozing.ListItemCategory.ListCustomAdaper.ViewHolder;
+import com.example.demozing.ProgramList.ListCustomAdaper.ViewHolder;
 import com.example.demozing.dialog.CommentDialog;
 import com.example.demozing.dialog.RateDialog;
 import com.example.demozing.model.Comment;
-import com.example.demozing.model.Video;
+import com.example.demozing.model.Program;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical" >
+    <ImageView android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/image"
+        android:scaleType="fitXY"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"/>
+    
+    <TextView
+        android:background="#CC000000"
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image"
+        android:layout_alignRight="@+id/image"
+        android:text="30:12"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:id="@+id/title"
+        android:textColor="@android:color/black"
+        android:text="Thép đã tôi thế đấy"
+        android:layout_toRightOf="@id/image"
+         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/show_title"
+        android:textColor="@color/text_green"
+        android:text="Phim truyền hình"
+        android:layout_toRightOf="@id/image" 
+        android:layout_below="@+id/title"/>
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:id="@+id/view_number"
+        android:text="100,000 lượt xem"
+        android:layout_toRightOf="@id/image" 
+        android:layout_below="@+id/show_title"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:indeterminateDrawable="@drawable/progress_bar" />
+
+</RelativeLayout>

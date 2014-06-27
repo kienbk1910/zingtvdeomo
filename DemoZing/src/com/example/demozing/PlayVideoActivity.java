@@ -184,7 +184,7 @@ boolean isfullScreen;
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(this, Uri
-					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/4b4b99222aa7e46b7d93ba0dcd51fd3d/53aa3e24/2014/0623/22/1cc2afeb8860d5b56a7d919ccde03145.mp4?format=f360&device=web_flash&start=0"));
+					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/ace2d20c9fc9f10836d309d4a36be493/53ad1247/2014/0618/39/f327a9adcfbc30830f8501dbba576f2c.mp4?format=f360&device=web_flash&start=0"));
 			player.setOnPreparedListener(this);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

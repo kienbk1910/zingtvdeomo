@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_item_custom" >
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/images1" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image"
+            android:text="Kể chuyện đêm khuya"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_toRightOf="@id/image"
+            android:text="Giải trí"
+            android:textColor="@color/text_green"
+            android:textStyle="italic" />
+
+        <FrameLayout
+            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/type"
+            android:layout_toRightOf="@id/image" >
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateDrawable="@drawable/progress_bar" />
+
+            <com.example.demozing.DrawableAlignedButton
+                android:id="@+id/subcribe"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:drawableLeft="@drawable/ic_subscribe"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:text="Quan tâm" />
+        </FrameLayout>
+    </RelativeLayout>

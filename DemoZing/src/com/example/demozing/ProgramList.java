@@ -26,19 +26,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.androidquery.AQuery;
-import com.example.demozing.model.Video;
+import com.example.demozing.model.Program;
 
 /**
  * @author kienbk1910
  *
  */
-public class ListItemCategory  extends Fragment{
+public class ProgramList  extends Fragment{
 	ListCustomAdaper adaper;
 	ListView listView;
 	boolean isload;
     private View mFooterView;
 	String url ="http://image.mp3.zdn.vn/tv_program_225_225/1/6/167d1fd75f9d274f1c588269fc13cedb_1398737245.jpg";
-	List<Video> videos =new ArrayList<Video>();
+	List<Program> videos =new ArrayList<Program>();
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -62,7 +62,7 @@ public class ListItemCategory  extends Fragment{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent= new Intent(getActivity(), PlayVideoActivity.class);
+				Intent intent= new Intent(getActivity(), ProgramFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -89,9 +89,9 @@ public class ListItemCategory  extends Fragment{
 		return root;
 	}
 	
-	class ListCustomAdaper extends ArrayAdapter<Video>{
+	class ListCustomAdaper extends ArrayAdapter<Program>{
          private Context context;
-         private List<Video> videos;
+         private List<Program> videos;
          AQuery aQuery;
 		/**
 		 * @param context
@@ -99,14 +99,14 @@ public class ListItemCategory  extends Fragment{
 		 * @param objects
 		 */
 		public ListCustomAdaper(Context context, int resource,
-				List<Video> objects) {
+				List<Program> objects) {
 			super(context, resource, objects);
 			// TODO Auto-generated constructor stub
 			this.context=context;
 			this.videos=objects;
 			aQuery = new AQuery(context);
 		}
-		public void addMoreItem(List<Video> videos){
+		public void addMoreItem(List<Program> videos){
 			this.videos.addAll(videos);
 		}
 		@Override
@@ -128,7 +128,7 @@ public class ListItemCategory  extends Fragment{
 		    {
 		        holder = (ViewHolder) convertView.getTag();
 		    }
-		    Video info = videos.get(position);
+		    Program info = videos.get(position);
 		    AQuery query= aQuery.recycle(convertView);
 		    query.id(holder.image).progress(holder.progressBar).image(info.getUrl(), true, false, 0, 0, null, 0,1.0f);
 
@@ -177,7 +177,7 @@ public class ListItemCategory  extends Fragment{
 			isload=false;
 			for(int i =0;i<10;i++){
 				
-				videos.add(new Video(url));
+				videos.add(new Program(url));
 			
 			
 			}
