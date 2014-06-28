@@ -10,9 +10,10 @@ package com.example.demozing.model;
  */
 public class Program {
   String url;
-  String number;
+  int like;
   String  title;
-  String numberView;
+  double rate;
+  String category;
   /**
  * 
  */
@@ -20,10 +21,34 @@ public Program(String url) {
 	// TODO Auto-generated constructor stub
 	this.url=url;
 }
-/**
- * @return the url
- */
 public String getUrl() {
 	return url;
+}
+public void setUrl(String url) {
+	this.url = url;
+}
+public int getLike() {
+	return like;
+}
+public void setLike(int like) {
+	this.like = like;
+}
+public String getTitle() {
+	return title;
+}
+public void setTitle(String title) {
+	this.title = title;
+}
+public double getRate() {
+	return rate;
+}
+public void setRate(double rate) {
+	this.rate = rate;
+}
+public String getCategory() {
+	return category;
+}
+public void setCategory(String category) {
+	this.category = category;
 }
 }

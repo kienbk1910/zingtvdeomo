@@ -4,11 +4,13 @@
  */
 package com.example.demozing.model;
 
+import java.io.Serializable;
+
 /**
  * @author kienbk1910
  * 
  */
-public class Video {
+public class Video implements Serializable{
 	private String title;
 	private String showTitle;
 	private int viewNumber;

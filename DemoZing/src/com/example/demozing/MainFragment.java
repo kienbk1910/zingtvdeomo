@@ -4,12 +4,31 @@
  */
 package com.example.demozing;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.androidquery.AQuery;
 import com.example.demozing.custom.ProgramComponent;
+import com.example.demozing.custom.VideoComponent;
+import com.example.demozing.model.Program;
+import com.example.demozing.model.Video;
 import com.example.demozing.slider.IndexPointSlider;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -34,19 +53,23 @@ import android.view.View;
 import android.view.View.OnGenericMotionListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 /**
  * @author kienbk1910
  * 
  */
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class MainFragment extends Fragment implements View.OnClickListener {
 	/**
 	 * The pager widget, which handles animation and allows swiping horizontally
 	 * to access previous and next wizard steps.
 	 */
+
+	private static final String URL_BANNER = "http://giaoducviet.vn/demozingtv/banner.php";
+	private static final String URL_PROGRAM = "http://giaoducviet.vn/demozingtv/program.php";
+	private static final String ULR_VIDEO = "http://giaoducviet.vn/demozingtv/video.php";
 	private ViewPager mPager;
 	private IndexPointSlider pointSlider;
-	private ProgramComponent program1;
 	AQuery aQuery;
 
 	/**
@@ -54,12 +77,17 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 	 */
 	private PagerAdapter mPagerAdapter;
 	Timer timer = new Timer();
-	int[] id = { R.id.video0, R.id.video1, R.id.video2, R.id.video3,
-			R.id.video4, R.id.video5, R.id.video6, R.id.video7, R.id.video8 };
+
 	int[] programId = { R.id.program1, R.id.program2, R.id.program3,
 			R.id.program4, R.id.program5, R.id.program6, R.id.program7,
 			R.id.program8 };
+	int[] videoid = { R.id.video1, R.id.video2, R.id.video3, R.id.video4,
+			R.id.video5, R.id.video6, R.id.video7, R.id.video8, R.id.video9,
+			R.id.video10, R.id.video11, R.id.video12, R.id.video13,
+			R.id.video14, R.id.video15, R.id.video16, R.id.video17,
+			R.id.video18 };
 	ProgramComponent[] programComponents = new ProgramComponent[8];
+	VideoComponent[] videoComponents = new VideoComponent[18];
 	public Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			mPager.setCurrentItem((mPager.getCurrentItem() + 1) % 5);
@@ -85,16 +113,18 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		mPager = (ViewPager) root.findViewById(R.id.pager);
 		mPager.setOffscreenPageLimit(5);
 		pointSlider = (IndexPointSlider) root.findViewById(R.id.indexSlider);
-		for(int i=0; i<programComponents.length;i++){
-			programComponents[i]=(ProgramComponent)root.findViewById(programId[i]);
+		for (int i = 0; i < programComponents.length; i++) {
+			programComponents[i] = (ProgramComponent) root
+					.findViewById(programId[i]);
 			programComponents[i].setOnClickListener(this);
 		}
-		
+		for (int i = 0; i < videoComponents.length; i++) {
+			videoComponents[i] = (VideoComponent) root.findViewById(videoid[i]);
+			videoComponents[i].setOnClickListener(this);
+		}
 
 		pointSlider.setNumberPoint(5);
-		mPagerAdapter = new ScreenSlidePagerAdapter(getActivity()
-				.getSupportFragmentManager());
-		mPager.setAdapter(mPagerAdapter);
+
 		// mPager.setScrollDurationFactor(2);
 		mPager.setOnPageChangeListener(new OnPageChangeListener() {
 
@@ -128,33 +158,29 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 				return false;
 			}
 		});
-		String url = "http://image.mp3.zdn.vn/tv_program_225_225/4/e/4e2b0ef28ab651d398a1883c71dbfaf4_1381907391.jpg";
-		for (int i = 0; i < id.length; i++) {
-			AQuery aQuery = new AQuery(getActivity());
-			aQuery.id(root.findViewById(id[i]).findViewById(R.id.imageView1))
-					.progress(
-							root.findViewById(id[i]).findViewById(
-									R.id.progressBar1)).image(url, true, false);
-		}
-
 		startTimer();
-		new LoadProgram().execute();
+		new LoadProgram().execute(URL_PROGRAM);
+		new LoadBanner().execute(URL_BANNER);
+		new LoadVideo().execute(ULR_VIDEO);
 		return root;
 	}
 
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-		public ScreenSlidePagerAdapter(FragmentManager fm) {
+		List<Video> videos;
+
+		public ScreenSlidePagerAdapter(FragmentManager fm, List<Video> videos) {
 			super(fm);
+			this.videos = videos;
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-			return new SliderItemFragment();
+			return SliderItemFragment.newInstance(videos.get(position));
 		}
 
 		@Override
 		public int getCount() {
-			return 5;
+			return videos.size();
 		}
 	}
 
@@ -168,34 +194,67 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 			}
 		}, 1000 * 15, 1000 * 15);
 	};
-	class LoadProgram extends AsyncTask<String, String, String>{
 
-		/* (non-Javadoc)
+	class LoadProgram extends AsyncTask<String, String, List<Program>> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
 		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
+		protected List<Program> doInBackground(String... params) {
+			List<Program> programs = null;
+			try {
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpPost = new HttpGet(params[0]);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				httpEntity.writeTo(out);
+				out.close();
+				String responseString = out.toString();
+				Gson gson = new Gson();
+				Type listType = new TypeToken<List<Program>>() {
+				}.getType();
+				programs = gson.fromJson(responseString, listType);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return programs;
 		}
-		/* (non-Javadoc)
+
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(List<Program> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			for (int i = 0; i < programComponents.length; i++) {
-				AQuery aQuery = new AQuery(getActivity());
-				aQuery.id(programComponents[i].getImageView())
-				.image("http://image.mp3.zdn.vn/tv_program_225_225/b/2/b2049bd0e5c16672398c9ef463614469_1403580678.jpg",
-						true, true, 0, 0, null, 0, 1.0f);
-			}
+			if (result != null)
+				for (int i = 0; i < result.size(); i++) {
+					Program program = result.get(i);
+					AQuery aQuery = new AQuery(getActivity());
+					aQuery.id(programComponents[i].getImageView()).image(
+							program.getUrl(), true, true, 0, 0, null, 0, 1.0f);
+					programComponents[i].setTitle(program.getTitle());
+				}
 		}
-		
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	@Override
@@ -204,15 +263,135 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 		Log.d("kienbk1910", "click");
 		switch (v.getId()) {
 		case R.id.program1:
-			 Intent intent = new Intent(getActivity(), ProgramFragmentActivity.class);
-			 getActivity().startActivity(intent);
-			 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			Intent intent = new Intent(getActivity(),
+					ProgramFragmentActivity.class);
+			getActivity().startActivity(intent);
+			getActivity().overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
 			break;
 
 		default:
 			break;
 		}
-	
+
 	}
 
+	class LoadBanner extends AsyncTask<String, String, List<Video>> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
+		@Override
+		protected List<Video> doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			// make HTTP request
+			List<Video> session = null;
+			try {
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpPost = new HttpGet(params[0]);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				httpEntity.writeTo(out);
+				out.close();
+				String responseString = out.toString();
+				Gson gson = new Gson();
+				Type listType = new TypeToken<List<Video>>() {
+				}.getType();
+				session = gson.fromJson(responseString, listType);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return session;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(List<Video> result) {
+			// TODO Auto-generated method stub
+			if (result != null) {
+				mPagerAdapter = new ScreenSlidePagerAdapter(getActivity()
+						.getSupportFragmentManager(), result);
+				mPager.setAdapter(mPagerAdapter);
+			}
+			super.onPostExecute(result);
+		}
+
+	}
+
+	class LoadVideo extends AsyncTask<String, String, List<Video>> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
+		@Override
+		protected List<Video> doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			// make HTTP request
+			List<Video> session = null;
+			try {
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpPost = new HttpGet(params[0]);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				httpEntity.writeTo(out);
+				out.close();
+				String responseString = out.toString();
+				Gson gson = new Gson();
+				Type listType = new TypeToken<List<Video>>() {
+				}.getType();
+				session = gson.fromJson(responseString, listType);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return session;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(List<Video> result) {
+			// TODO Auto-generated method stub
+			if (result != null) {
+				int i = 0;
+				for (Video video : result) {
+					AQuery aQuery = new AQuery(getActivity());
+					aQuery.id(videoComponents[i].getImageView()).progress(videoComponents[i].getProgressBar()).image(
+							video.getUrlImage(), true, true, 0, 0, null, 0,
+							1.0f);
+					i++;
+				}
+			}
+			super.onPostExecute(result);
+		}
+
+	}
 }
