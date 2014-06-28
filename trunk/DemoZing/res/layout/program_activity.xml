@@ -12,9 +12,14 @@
         layout="@layout/program" />
 
     <include
+        android:id="@+id/like_rate"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_below="@id/program1"
         layout="@layout/rate_and_like" />
+      <include layout="@layout/tab_layout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@id/like_rate"/>
 
 </RelativeLayout>
