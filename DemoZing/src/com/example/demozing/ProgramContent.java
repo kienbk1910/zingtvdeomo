@@ -24,21 +24,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.example.demozing.model.Program;
+import com.example.demozing.model.Video;
 
 /**
  * @author kienbk1910
  *
  */
-public class ProgramList  extends Fragment{
+public class ProgramContent  extends Fragment{
 	ListCustomAdaper adaper;
 	ListView listView;
 	boolean isload;
     private View mFooterView;
-	String url ="http://image.mp3.zdn.vn/tv_program_225_225/1/6/167d1fd75f9d274f1c588269fc13cedb_1398737245.jpg";
-	List<Program> videos =new ArrayList<Program>();
+	String url ="http://image.mp3.zdn.vn/content/9/4/9489cf5f9bf91d46ae71c9478866a180_1403774561.jpg";
+	List<Video> videos =new ArrayList<Video>();
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -62,7 +64,7 @@ public class ProgramList  extends Fragment{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent= new Intent(getActivity(), ProgramFragmentActivity.class);
+				Intent intent= new Intent(getActivity(), GroupActivity.class);
 				startActivity(intent);
 				 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -91,48 +93,50 @@ public class ProgramList  extends Fragment{
 		return root;
 	}
 	
-	class ListCustomAdaper extends ArrayAdapter<Program>{
+	class ListCustomAdaper extends ArrayAdapter<Video>{
          private Context context;
-         private List<Program> videos;
+         private List<Video> videos;
          AQuery aQuery;
 		/**
 		 * @param context
 		 * @param resource
-		 * @param objects
+		 * @param videos2
 		 */
 		public ListCustomAdaper(Context context, int resource,
-				List<Program> objects) {
-			super(context, resource, objects);
+				List<Video> videos2) {
+			super(context, resource, videos2);
 			// TODO Auto-generated constructor stub
 			this.context=context;
-			this.videos=objects;
+			this.videos=videos2;
 			aQuery = new AQuery(context);
 		}
-		public void addMoreItem(List<Program> videos){
-			this.videos.addAll(videos);
-		}
+		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent)
 		{
 		  
 		   
-			   ViewHolder holder;
+			ViewHolder holder;
 		    if(convertView == null )
 		    {
 		        LayoutInflater inflater = ((FragmentActivity)context).getLayoutInflater();
-		         holder = new ViewHolder();
-		        convertView = inflater.inflate(R.layout.item_listview, parent, false);
-		        holder.image = (ImageView) convertView.findViewById(R.id.image);
-		        holder.progressBar=(ProgressBar)convertView.findViewById(R.id.progressBar1);
+		        holder = new ViewHolder();
+		        convertView = inflater.inflate(R.layout.content_item, parent, false);
+//		        holder.image=(ImageView) convertView.findViewById(R.id.image);
+//		        holder.title=(TextView)convertView.findViewById(R.id.title);
+//		        holder.duration=(TextView)convertView.findViewById(R.id.duration);
+//		        holder.progressBar=(ProgressBar)convertView.findViewById(R.id.progressBar1);
+//		        holder.titleshow=(TextView)convertView.findViewById(R.id.show_title);
+//		        holder.viewNumber=(TextView)convertView.findViewById(R.id.view_number);
 		        convertView.setTag(holder);
 		    }
 		    else
 		    {
 		        holder = (ViewHolder) convertView.getTag();
 		    }
-		    Program info = videos.get(position);
-		    AQuery query= aQuery.recycle(convertView);
-		    query.id(holder.image).progress(holder.progressBar).image(info.getUrl(), true, false, 0, 0, null, 0,1.0f);
+//		    Video video = videos.get(position);
+//		    AQuery query= aQuery.recycle(convertView);
+//		    query.id(holder.image).progress(holder.progressBar).image(video.getUrlImage(), true, true, 0, 0, null, 0,1.0f);
 
 		    return convertView;
 		}
@@ -141,6 +145,10 @@ public class ProgramList  extends Fragment{
 		{
 		    ImageView image;
 		    ProgressBar progressBar;
+		    TextView title;
+		    TextView titleshow;
+		    TextView  viewNumber;
+		    TextView duration;
 		}
 		    
 	}
@@ -179,7 +187,7 @@ public class ProgramList  extends Fragment{
 			isload=false;
 			for(int i =0;i<10;i++){
 				
-				videos.add(new Program(url));
+				videos.add(new Video(url));
 			
 			
 			}

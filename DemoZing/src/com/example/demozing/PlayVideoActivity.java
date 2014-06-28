@@ -319,19 +319,16 @@ boolean isfullScreen;
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.FragmentActivity#onStart()
-	 */
-	@Override
-	protected void onStart() {
-		Log.d("kienbk1910", "onstart");
-		// TODO Auto-generated method stub
-		getWindow().setWindowAnimations(R.style.in_right_out_right_animation);
+/* (non-Javadoc)
+ * @see android.support.v4.app.FragmentActivity#onBackPressed()
+ */
+@Override
+public void onBackPressed() {
+	// TODO Auto-generated method stub
+	super.onBackPressed();
+    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-		super.onStart();
-	}
+}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -339,6 +336,8 @@ boolean isfullScreen;
 		case android.R.id.home:
 
 			finish();
+		    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
 			return true;
 		case R.id.action_share:
 			showChooser();

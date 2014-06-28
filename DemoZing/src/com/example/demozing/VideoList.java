@@ -66,6 +66,7 @@ public class VideoList  extends Fragment{
 				// TODO Auto-generated method stub
 				Intent intent= new Intent(getActivity(), PlayVideoActivity.class);
 				startActivity(intent);
+				 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 			}
 		});
 		listView.setOnScrollListener(new OnScrollListener() {

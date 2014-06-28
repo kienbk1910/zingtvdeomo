@@ -75,8 +75,7 @@
             android:paddingTop="15dp"
             android:text="Tin Tức"
             style="@style/category_text"/>
-
-        <HorizontalScrollView
+ <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -85,59 +84,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video27"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video9"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video10"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video11"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video12"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video13"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video14"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video15"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video16"
+                    layout="@layout/video_small_item" />
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -159,59 +140,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video17"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video18"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video19"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video20"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video21"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video22"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video23"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video24"
+                    layout="@layout/video_small_item" />
 
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="70dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/images" />
+                <include
+                    android:id="@+id/video25"
+                    layout="@layout/video_small_item" />
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -225,50 +188,122 @@
             style="@style/category_text" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2" >
 
-            <ImageView
-                android:layout_width="0dp"
+           
+            <com.example.demozing.custom.ProgramComponent
+                android:id="@+id/program1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
-                android:src="@drawable/images1" />
+                 android:scaleType="fitXY"
+                android:src="@drawable/default_program" />
 
-            <ImageView
-                android:layout_width="0dp"
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
-                android:src="@drawable/images1" />
+                android:scaleType="fitXY"
+                android:id="@+id/program2"
+                android:src="@drawable/default_program" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2" >
 
-            <ImageView
-                android:layout_width="0dp"
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
-                android:src="@drawable/images1" />
+                android:scaleType="fitXY"
+                      android:id="@+id/program3"
+                android:src="@drawable/default_program" />
 
-            <ImageView
-                android:layout_width="0dp"
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
-                android:src="@drawable/images1" />
+                 android:scaleType="fitXY"
+                       android:id="@+id/program4"
+                android:src="@drawable/default_program" />
         </LinearLayout>
-    </LinearLayout>
+  
+     <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="15dp"
+            android:text="TV SHOW"
+            style="@style/category_text" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+           
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                      android:id="@+id/program5"
+                 android:scaleType="fitXY"
+                android:src="@drawable/default_program" />
+
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                 android:scaleType="fitXY"
+                android:id="@+id/program6"
+                android:src="@drawable/default_program" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                      android:id="@+id/program7"
+                android:src="@drawable/default_program" />
+
+            <com.example.demozing.custom.ProgramComponent
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                android:id="@+id/program8"
+                android:src="@drawable/default_program" />
+        </LinearLayout>
+  </LinearLayout>
 </ScrollView>

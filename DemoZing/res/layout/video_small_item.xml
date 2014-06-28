@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginLeft="5dp" >
+    android:layout_marginLeft="5dp"
+    android:orientation="vertical" >
 
-    <ImageView
+    <com.example.demozing.custom.VideoImageView
         android:id="@+id/imageView1"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
@@ -24,33 +24,33 @@
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="55dp"
         android:indeterminateDrawable="@drawable/progress_bar" />
-	<LinearLayout
-	    android:padding="3dp"
-	    android:layout_alignParentBottom="true"
-     	android:layout_alignParentRight="true"
-   		android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/bg_title">
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_title"
+        android:orientation="vertical"
+        android:padding="3dp" >
+
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tập 4"
-             android:textSize="14sp"
             android:textColor="@android:color/white"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
-         
-            android:textColor="@color/text_green"
             android:id="@+id/subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tạp chí thời trang"
-            android:textStyle="normal"
-            android:textSize="12sp" />
-</LinearLayout>
+            android:textColor="@color/text_green"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+    </LinearLayout>
 
 </RelativeLayout>

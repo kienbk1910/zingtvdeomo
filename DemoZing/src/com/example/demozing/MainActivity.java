@@ -14,6 +14,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import android.text.GetChars;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class MainActivity extends SlidingFragmentActivity {
@@ -30,6 +32,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	private Fragment mContent;
 	private Context context;
 	boolean isOpen;
+	boolean doubleBackToExitPressedOnce;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -151,20 +154,40 @@ context=this;
 		}, 50);
 	
 	}
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.FragmentActivity#onStart()
-	 */
 	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		getWindow().setWindowAnimations(R.style.in_left_out_left_animation);
-		super.onStart();
+	protected void onResume() {
+	    super.onResume();
+	    // .... other stuff in my onResume ....
+	    this.doubleBackToExitPressedOnce = false;
 	}
+	@Override
+	public void onBackPressed() {
+	    if (doubleBackToExitPressedOnce) {
+	        super.onBackPressed();
+	        Intent intent = new Intent(Intent.ACTION_MAIN);
+	        intent.addCategory(Intent.CATEGORY_HOME);
+	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        startActivity(intent);
+	        return;
+	    }
+
+	    this.doubleBackToExitPressedOnce = true;
+	    Toast.makeText(this, "Nhấn back lần nữa để thoát", Toast.LENGTH_SHORT).show();
+
+	    new Handler().postDelayed(new Runnable() {
+
+	        @Override
+	        public void run() {
+	            doubleBackToExitPressedOnce=false;                       
+	        }
+	    }, 2000);
+	} 
 	public void logout(){
 		Editor editor = getSharedPreferences(Constants.KEY_STORE, Context.MODE_PRIVATE).edit();
 	     editor.putBoolean(Constants.IS_LOGIN, false);
 	     editor.commit(); 
 		finish();
+		   overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 	}
 	 public  boolean hasConnection() {
 	
