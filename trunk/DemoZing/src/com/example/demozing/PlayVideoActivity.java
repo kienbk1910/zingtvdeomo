@@ -184,7 +184,7 @@ boolean isfullScreen;
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(this, Uri
-					.parse("http://tv7.hot2.cache10.vcdn.vn/streaming/ace2d20c9fc9f10836d309d4a36be493/53ad1247/2014/0618/39/f327a9adcfbc30830f8501dbba576f2c.mp4?format=f360&device=web_flash&start=0"));
+					.parse("http://giaoducviet.vn/demozingtv/test.mp4"));
 			player.setOnPreparedListener(this);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
