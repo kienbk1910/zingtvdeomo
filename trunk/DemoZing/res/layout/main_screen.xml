@@ -9,7 +9,9 @@
         android:background="@android:color/white"
         android:orientation="vertical" >
 
-        <include layout="@layout/slider" />
+        <include layout="@layout/slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/category_text"

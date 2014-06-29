@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
@@ -22,6 +23,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.androidquery.AQuery;
+import com.example.config.Common;
 import com.example.config.Config;
 import com.example.demozing.custom.ProgramComponent;
 import com.example.demozing.custom.VideoComponent;
@@ -34,6 +36,7 @@ import com.google.gson.reflect.TypeToken;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -66,11 +69,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 	 * to access previous and next wizard steps.
 	 */
 
-	
 	private ViewPager mPager;
 	private IndexPointSlider pointSlider;
 	AQuery aQuery;
-
+	private List<Program> programs = new ArrayList<Program>();
+	private List<Video> videos = new ArrayList<Video>();
 	/**
 	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
@@ -240,14 +243,18 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 		protected void onPostExecute(List<Program> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if (result != null)
-				for (int i = 0; i < result.size(); i++) {
-					Program program = result.get(i);
+
+			if (result != null) {
+				int i = 0;
+				for (Program program : result) {
+					programs.add(program);
 					AQuery aQuery = new AQuery(getActivity());
 					aQuery.id(programComponents[i].getImageView()).image(
 							program.getUrl(), true, true, 0, 0, null, 0, 1.0f);
 					programComponents[i].setTitle(program.getTitle());
+					i++;
 				}
+			}
 		}
 	}
 
@@ -262,17 +269,102 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 		Log.d("kienbk1910", "click");
 		switch (v.getId()) {
 		case R.id.program1:
-			Intent intent = new Intent(getActivity(),
-					ProgramFragmentActivity.class);
-			getActivity().startActivity(intent);
-			getActivity().overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_left);
+			chooseProgram(programs.get(0));
+			break;
+		case R.id.program2:
+			chooseProgram(programs.get(1));
+			break;
+		case R.id.program3:
+			chooseProgram(programs.get(2));
+			break;
+		case R.id.program4:
+			chooseProgram(programs.get(3));
+			break;
+		case R.id.program5:
+			chooseProgram(programs.get(4));
+			break;
+		case R.id.program6:
+			chooseProgram(programs.get(5));
+			break;
+		case R.id.program7:
+			chooseProgram(programs.get(6));
+			break;
+		case R.id.program8:
+			chooseProgram(programs.get(7));
+			break;
+		case R.id.video1:
+			chooseVideo(videos.get(0));
+			break;
+		case R.id.video2:
+			chooseVideo(videos.get(1));
+			break;
+		case R.id.video3:
+			chooseVideo(videos.get(2));
+			break;
+		case R.id.video4:
+			chooseVideo(videos.get(3));
+			break;
+		case R.id.video5:
+			chooseVideo(videos.get(4));
+			break;
+		case R.id.video6:
+			chooseVideo(videos.get(5));
+			break;
+		case R.id.video7:
+			chooseVideo(videos.get(6));
+			break;
+		case R.id.video8:
+			chooseVideo(videos.get(7));
+			break;
+		case R.id.video9:
+			chooseVideo(videos.get(8));
+			break;
+		case R.id.video10:
+			chooseVideo(videos.get(9));
+			break;
+		case R.id.video11:
+			chooseVideo(videos.get(10));
+			break;
+		case R.id.video12:
+			chooseVideo(videos.get(11));
+			break;
+		case R.id.video13:
+			chooseVideo(videos.get(12));
+			break;
+		case R.id.video14:
+			chooseVideo(videos.get(13));
+			break;
+		case R.id.video15:
+			chooseVideo(videos.get(14));
+			break;
+		case R.id.video16:
+			chooseVideo(videos.get(15));
+			break;
+		case R.id.video17:
+			chooseVideo(videos.get(16));
+			break;
+		case R.id.video18:
+			chooseVideo(videos.get(17));
 			break;
 
-		default:
-			break;
 		}
 
+	}
+
+	public void chooseProgram(Program program) {
+		Intent intent = new Intent(getActivity(), ProgramFragmentActivity.class);
+		intent.putExtra(Common.PROGRAM, program);
+		getActivity().startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.slide_in_right,
+				R.anim.slide_out_left);
+	}
+
+	public void chooseVideo(Video video) {
+		Intent intent = new Intent(getActivity(), PlayVideoActivity.class);
+		intent.putExtra(Common.VIDEO, video);
+		getActivity().startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.slide_in_right,
+				R.anim.slide_out_left);
 	}
 
 	class LoadBanner extends AsyncTask<String, String, List<Video>> {
@@ -382,10 +474,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			if (result != null) {
 				int i = 0;
 				for (Video video : result) {
+					videos.add(video);
 					AQuery aQuery = new AQuery(getActivity());
-					aQuery.id(videoComponents[i].getImageView()).progress(videoComponents[i].getProgressBar()).image(
-							video.getUrlImage(), true, true, 0, 0, null, 0,
-							1.0f);
+					aQuery.id(videoComponents[i].getImageView())
+							.progress(videoComponents[i].getProgressBar())
+							.image(video.getUrlImage(), true, true, 0, 0, null,
+									0, 1.0f);
+					videoComponents[i].setTitle(video.getTitle());
 					i++;
 				}
 			}
