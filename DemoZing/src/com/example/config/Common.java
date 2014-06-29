@@ -10,4 +10,5 @@ package com.example.config;
  */
 public class Common {
  public static  String PROGRAM="progam";
+ public static String VIDEO="video";
 }
