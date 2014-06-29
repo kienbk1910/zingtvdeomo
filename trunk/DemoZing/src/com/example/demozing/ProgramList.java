@@ -4,8 +4,18 @@
  */
 package com.example.demozing;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +34,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.androidquery.AQuery;
+import com.example.config.Common;
+import com.example.config.Config;
 import com.example.demozing.model.Program;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author kienbk1910
@@ -37,8 +52,7 @@ public class ProgramList  extends Fragment{
 	ListView listView;
 	boolean isload;
     private View mFooterView;
-	String url ="http://image.mp3.zdn.vn/tv_program_225_225/1/6/167d1fd75f9d274f1c588269fc13cedb_1398737245.jpg";
-	List<Program> videos =new ArrayList<Program>();
+	List<Program> programs =new ArrayList<Program>();
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -51,7 +65,7 @@ public class ProgramList  extends Fragment{
 		ProgressBar progressBar =(ProgressBar) root.findViewById(R.id.progressBar1);
 		listView =(ListView) root.findViewById(R.id.list);
 		isload=false;
-		adaper = new ListCustomAdaper(getActivity(), 0, videos);
+		adaper = new ListCustomAdaper(getActivity(), 0, programs);
 		listView.addFooterView(mFooterView);
 		listView.setAdapter(adaper);
 	//	listView.setEmptyView(progressBar);	
@@ -62,7 +76,9 @@ public class ProgramList  extends Fragment{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				
 				Intent intent= new Intent(getActivity(), ProgramFragmentActivity.class);
+				intent.putExtra(Common.PROGRAM, programs.get(position));
 				startActivity(intent);
 				 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -82,12 +98,12 @@ public class ProgramList  extends Fragment{
 				// TODO Auto-generated method stub
 				int lastInScreen = firstVisibleItem + visibleItemCount;    
 				   if((lastInScreen == totalItemCount &&!isload) ){     
-				       new AddData().execute();
+				      new AddData().execute(Config.URL_PROGRAM);
 				   }
 				
 			}
 		});
-		new AddData().execute();
+		new AddData().execute(Config.URL_PROGRAM);
 		return root;
 	}
 	
@@ -124,6 +140,9 @@ public class ProgramList  extends Fragment{
 		        convertView = inflater.inflate(R.layout.item_listview, parent, false);
 		        holder.image = (ImageView) convertView.findViewById(R.id.image);
 		        holder.progressBar=(ProgressBar)convertView.findViewById(R.id.progressBar1);
+		        holder.title=(TextView)convertView.findViewById(R.id.title);
+		        holder.category=(TextView)convertView.findViewById(R.id.category);
+		        holder.numberLike=(TextView)convertView.findViewById(R.id.number_view);
 		        convertView.setTag(holder);
 		    }
 		    else
@@ -132,8 +151,10 @@ public class ProgramList  extends Fragment{
 		    }
 		    Program info = videos.get(position);
 		    AQuery query= aQuery.recycle(convertView);
-		    query.id(holder.image).progress(holder.progressBar).image(info.getUrl(), true, false, 0, 0, null, 0,1.0f);
-
+		    query.id(holder.image).progress(holder.progressBar).image(info.getUrl(), true, true, 0, 0, null, 0,1.0f);
+		    holder.title.setText(info.getTitle());
+		    holder.category.setText(info.getCategory());
+		    holder.numberLike.setText(String.valueOf(info.getLike()+" like"));
 		    return convertView;
 		}
 
@@ -141,10 +162,13 @@ public class ProgramList  extends Fragment{
 		{
 		    ImageView image;
 		    ProgressBar progressBar;
+		    TextView title;
+		    TextView category;
+		    TextView numberLike;
 		}
 		    
 	}
-	class AddData extends AsyncTask<String, String, String>{
+	class AddData extends AsyncTask<String, String, List<Program>>{
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPreExecute()
 		 */
@@ -160,29 +184,46 @@ public class ProgramList  extends Fragment{
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
 		@Override
-		protected String doInBackground(String... params) {
+		protected  List<Program> doInBackground(String... params) {
 			// TODO Auto-generated method stub
+			List<Program> programs = null;
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpPost = new HttpGet(params[0]);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				httpEntity.writeTo(out);
+				out.close();
+				String responseString = out.toString();
+				Gson gson = new Gson();
+				Type listType = new TypeToken<List<Program>>() {
+				}.getType();
+				programs = gson.fromJson(responseString, listType);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return null;
+
+			return programs;
 		}
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute( List<Program> result) {
 			// TODO Auto-generated method stub
 			isload=false;
-			for(int i =0;i<10;i++){
-				
-				videos.add(new Program(url));
+			if(result!=null && result.size()>0)
+		
+				programs.addAll(result);
 			
-			
-			}
 			mFooterView.setVisibility(View.GONE);
 		//	adaper.addMoreItem(videos);
 			adaper.notifyDataSetChanged();

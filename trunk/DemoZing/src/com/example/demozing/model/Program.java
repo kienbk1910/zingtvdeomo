@@ -4,11 +4,13 @@
  */
 package com.example.demozing.model;
 
+import java.io.Serializable;
+
 /**
  * @author kienbk1910
  *
  */
-public class Program {
+public class Program implements Serializable{
   String url;
   int like;
   String  title;
