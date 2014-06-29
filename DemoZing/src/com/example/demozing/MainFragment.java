@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.androidquery.AQuery;
+import com.example.config.Config;
 import com.example.demozing.custom.ProgramComponent;
 import com.example.demozing.custom.VideoComponent;
 import com.example.demozing.model.Program;
@@ -65,9 +66,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 	 * to access previous and next wizard steps.
 	 */
 
-	private static final String URL_BANNER = "http://giaoducviet.vn/demozingtv/banner.php";
-	private static final String URL_PROGRAM = "http://giaoducviet.vn/demozingtv/program.php";
-	private static final String ULR_VIDEO = "http://giaoducviet.vn/demozingtv/video.php";
+	
 	private ViewPager mPager;
 	private IndexPointSlider pointSlider;
 	AQuery aQuery;
@@ -159,9 +158,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			}
 		});
 		startTimer();
-		new LoadProgram().execute(URL_PROGRAM);
-		new LoadBanner().execute(URL_BANNER);
-		new LoadVideo().execute(ULR_VIDEO);
+		new LoadProgram().execute(Config.URL_PROGRAM);
+		new LoadBanner().execute(Config.URL_BANNER);
+		new LoadVideo().execute(Config.ULR_VIDEO);
 		return root;
 	}
 

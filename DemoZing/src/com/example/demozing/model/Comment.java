@@ -4,11 +4,13 @@
  */
 package com.example.demozing.model;
 
+import java.io.Serializable;
+
 /**
  * @author kienbk1910
  *
  */
-public class Comment {
+public class Comment implements Serializable{
 	private String userName;
 	private String avatar;
 	private long  date;

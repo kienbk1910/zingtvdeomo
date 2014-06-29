@@ -4,8 +4,20 @@
  */
 package com.example.demozing;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +39,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
+import com.example.config.Config;
 import com.example.demozing.model.Program;
 import com.example.demozing.model.Video;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author kienbk1910
@@ -83,12 +98,12 @@ public class VideoList  extends Fragment{
 				// TODO Auto-generated method stub
 				int lastInScreen = firstVisibleItem + visibleItemCount;    
 				   if((lastInScreen == totalItemCount &&!isload) ){     
-				       new AddData().execute();
+				       new AddData().execute(Config.ULR_VIDEO);
 				   }
 				
 			}
 		});
-		new AddData().execute();
+		new AddData().execute(Config.ULR_VIDEO);
 		return root;
 	}
 	
@@ -136,7 +151,10 @@ public class VideoList  extends Fragment{
 		    Video video = videos.get(position);
 		    AQuery query= aQuery.recycle(convertView);
 		    query.id(holder.image).progress(holder.progressBar).image(video.getUrlImage(), true, true, 0, 0, null, 0,1.0f);
-
+		    holder.title.setText(video.getTitle());
+		    holder.titleshow.setText(video.getShowTitle());
+		    holder.duration.setText(durationToString(video.getDuration()));
+		    holder.viewNumber.setText(String.valueOf(video.getViewNumber())+" lượt xem");
 		    return convertView;
 		}
 
@@ -149,9 +167,25 @@ public class VideoList  extends Fragment{
 		    TextView  viewNumber;
 		    TextView duration;
 		}
+		public String durationToString(int totalSeconds){
+			 StringBuilder  mFormatBuilder;
+			  Formatter     mFormatter;
+			  mFormatBuilder = new StringBuilder();
+		        mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
+	        int seconds = totalSeconds % 60;
+	        int minutes = (totalSeconds / 60) % 60;
+	        int hours   = totalSeconds / 3600;
+
+	        mFormatBuilder.setLength(0);
+	        if (hours > 0) {
+	            return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+	        } else {
+	            return mFormatter.format("%02d:%02d", minutes, seconds).toString();
+	        }
+		}
 		    
 	}
-	class AddData extends AsyncTask<String, String, String>{
+	class AddData extends AsyncTask<String, String, List<Video>>{
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPreExecute()
 		 */
@@ -167,29 +201,44 @@ public class VideoList  extends Fragment{
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
 		@Override
-		protected String doInBackground(String... params) {
+		protected List<Video> doInBackground(String... params) {
 			// TODO Auto-generated method stub
+			List<Video> session = null;
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpPost = new HttpGet(params[0]);
+
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				HttpEntity httpEntity = httpResponse.getEntity();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				httpEntity.writeTo(out);
+				out.close();
+				String responseString = out.toString();
+				Gson gson = new Gson();
+				Type listType = new TypeToken<List<Video>>() {
+				}.getType();
+				session = gson.fromJson(responseString, listType);
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return null;
+
+			return session;
 		}
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(List<Video> result) {
 			// TODO Auto-generated method stub
 			isload=false;
-			for(int i =0;i<10;i++){
-				
-				videos.add(new Video(url));
-			
-			
-			}
+			if(result!=null && result.size()>0)
+			      videos.addAll(result);
 			mFooterView.setVisibility(View.GONE);
 		//	adaper.addMoreItem(videos);
 			adaper.notifyDataSetChanged();

@@ -16,7 +16,7 @@
         android:src="@drawable/images1" />
 
     <TextView
-        android:id="@+id/number"
+        android:id="@+id/title"
         style="@style/category_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +25,10 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/number"
+        android:layout_below="@id/title"
         android:layout_toRightOf="@id/image"
         android:text="Yêu Anh, Em nhé"
         android:textColor="@color/text_green"
@@ -39,7 +39,7 @@
         android:id="@+id/number_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/category"
         android:layout_toRightOf="@id/image"
         android:text="200,000 lượt xem"
         android:textSize="12sp" />
