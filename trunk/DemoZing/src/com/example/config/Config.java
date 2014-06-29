@@ -13,4 +13,5 @@ public class Config {
 	public static final String URL_PROGRAM = "http://giaoducviet.vn/demozingtv/program.php";
 	public static final String ULR_VIDEO = "http://giaoducviet.vn/demozingtv/video.php";
 	public static final String ULR_COMMENT ="http://giaoducviet.vn/demozingtv/comment.php";
+	public static final String URL_GROUP="http://giaoducviet.vn/demozingtv/group.php";
 }
