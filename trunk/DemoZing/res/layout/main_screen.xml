@@ -1,312 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+   >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
-        <include layout="@layout/slider"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical" >
 
-        <TextView
-            style="@style/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:text="Video Mới Nổi Bật" />
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/slider" />
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            <TextView
+                style="@style/category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="Video Mới Nổi Bật" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video1"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video2"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video3"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video4"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video5"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video6"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                style="@style/category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="Tin Tức" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video7"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video8"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video9"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video10"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video11"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video12"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                style="@style/category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:text="Bóng Đá" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video13"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video14"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video15"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video16"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video17"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+
+                    <com.example.demozing.custom.VideoComponent
+                        android:id="@+id/video18"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                style="@style/category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:text="TV SHOW" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:layout_marginLeft="5dp"
-                    android:id="@+id/video1"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video2"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video3"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video4"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video5"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video6"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
             </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            style="@style/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            android:text="Tin Tức" />
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video7"
-                    android:layout_width="130dp"
-                      android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video8"
-                    android:layout_width="130dp"
-                      android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video9"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video10"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video11"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video12"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
+                android:orientation="horizontal"
+                android:weightSum="2" >
 
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
             </LinearLayout>
-        </HorizontalScrollView>
 
-        <TextView
-            style="@style/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
-            android:text="Bóng Đá" />
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            <TextView
+                style="@style/category_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:text="TV SHOW" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video13"
-                    android:layout_width="130dp"
-                      android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video14"
-                    android:layout_width="130dp"
-                      android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video15"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video16"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video17"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
-                
-                <com.example.demozing.custom.VideoComponent
-                    android:id="@+id/video18"
-                      android:layout_marginLeft="5dp"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content" />
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
             </LinearLayout>
-        </HorizontalScrollView>
 
-        <TextView
-            style="@style/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
-            android:text="TV SHOW" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2" >
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
+                android:orientation="horizontal"
+                android:weightSum="2" >
 
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
+
+                <com.example.demozing.custom.ProgramComponent
+                    android:id="@+id/program8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_program" />
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2" >
+    <include
+        android:id="@+id/loading_screen"
+         layout="@layout/loading_screen"/>
 
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-        </LinearLayout>
-
-        <TextView
-            style="@style/category_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
-            android:text="TV SHOW" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2" >
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2" >
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-
-            <com.example.demozing.custom.ProgramComponent
-                android:id="@+id/program8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_program" />
-        </LinearLayout>
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>

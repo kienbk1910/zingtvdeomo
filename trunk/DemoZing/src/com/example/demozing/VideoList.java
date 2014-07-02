@@ -36,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -54,6 +55,8 @@ public class VideoList  extends Fragment{
 	ListView listView;
 	boolean isload;
     private View mFooterView;
+    RelativeLayout main_content;
+    View loading_screen;
 	String url ="http://image.mp3.zdn.vn/content/9/4/9489cf5f9bf91d46ae71c9478866a180_1403774561.jpg";
 	List<Video> videos =new ArrayList<Video>();
 	/* (non-Javadoc)
@@ -65,7 +68,9 @@ public class VideoList  extends Fragment{
 		// TODO Auto-generated method stub
 		mFooterView = ((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.loading_view, null);
 		View root =inflater.inflate(R.layout.list_item_category, null);
-		ProgressBar progressBar =(ProgressBar) root.findViewById(R.id.progressBar1);
+		main_content =(RelativeLayout)root.findViewById(R.id.main_content);
+		loading_screen=(View)root.findViewById(R.id.loading_screen);
+		main_content.setVisibility(View.INVISIBLE);
 		listView =(ListView) root.findViewById(R.id.list);
 		isload=false;
 		adaper = new ListCustomAdaper(getActivity(), 0, videos);
@@ -240,7 +245,8 @@ public class VideoList  extends Fragment{
 			if(result!=null && result.size()>0)
 			      videos.addAll(result);
 			mFooterView.setVisibility(View.GONE);
-		//	adaper.addMoreItem(videos);
+			loading_screen.setVisibility(View.GONE);
+			main_content.setVisibility(View.VISIBLE);
 			adaper.notifyDataSetChanged();
 			super.onPostExecute(result);
 		}
