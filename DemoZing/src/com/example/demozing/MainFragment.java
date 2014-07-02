@@ -58,6 +58,7 @@ import android.view.View.OnGenericMotionListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 /**
  * @author kienbk1910
@@ -72,8 +73,20 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 	private ViewPager mPager;
 	private IndexPointSlider pointSlider;
 	AQuery aQuery;
+	private ScrollView mainScreen;
+	  View loading_screen;
 	private List<Program> programs = new ArrayList<Program>();
 	private List<Video> videos = new ArrayList<Video>();
+	int status=0;
+	Handler handler = new Handler(){
+		public void handleMessage(Message msg) {
+			status++;
+			if(status==3){
+				loading_screen.setVisibility(View.GONE);
+				mainScreen.setVisibility(View.VISIBLE);
+			}
+		};
+	};
 	/**
 	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
@@ -108,7 +121,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View root = inflater.inflate(R.layout.main_screen, null);
-
+		mainScreen =(ScrollView)root.findViewById(R.id.main_content);
+		loading_screen=(View)root.findViewById(R.id.loading_screen);
+		mainScreen.setVisibility(View.INVISIBLE);
 		getActivity().getActionBar().removeAllTabs();
 		getActivity().getActionBar().setNavigationMode(
 				ActionBar.NAVIGATION_MODE_STANDARD);
@@ -124,7 +139,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			videoComponents[i] = (VideoComponent) root.findViewById(videoid[i]);
 			videoComponents[i].setOnClickListener(this);
 		}
-
+		status=0;
 		pointSlider.setNumberPoint(5);
 
 		// mPager.setScrollDurationFactor(2);
@@ -246,6 +261,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
 			if (result != null) {
 				int i = 0;
+				handler.obtainMessage().sendToTarget();
 				for (Program program : result) {
 					programs.add(program);
 					AQuery aQuery = new AQuery(getActivity());
@@ -415,9 +431,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 		protected void onPostExecute(List<Video> result) {
 			// TODO Auto-generated method stub
 			if (result != null) {
+				handler.obtainMessage().sendToTarget();
 				mPagerAdapter = new ScreenSlidePagerAdapter(getActivity()
 						.getSupportFragmentManager(), result);
 				mPager.setAdapter(mPagerAdapter);
+			
 			}
 			super.onPostExecute(result);
 		}
@@ -473,6 +491,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			// TODO Auto-generated method stub
 			if (result != null) {
 				int i = 0;
+				handler.obtainMessage().sendToTarget();
 				for (Video video : result) {
 					videos.add(video);
 					AQuery aQuery = new AQuery(getActivity());

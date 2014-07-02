@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -52,6 +53,9 @@ public class ProgramList  extends Fragment{
 	ListView listView;
 	boolean isload;
     private View mFooterView;
+    RelativeLayout main_content;
+    View loading_screen;
+    
 	List<Program> programs =new ArrayList<Program>();
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -62,8 +66,11 @@ public class ProgramList  extends Fragment{
 		// TODO Auto-generated method stub
 		mFooterView = ((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.loading_view, null);
 		View root =inflater.inflate(R.layout.list_item_category, null);
-		ProgressBar progressBar =(ProgressBar) root.findViewById(R.id.progressBar1);
+		main_content =(RelativeLayout)root.findViewById(R.id.main_content);
+		loading_screen=(View)root.findViewById(R.id.loading_screen);
+		main_content.setVisibility(View.INVISIBLE);
 		listView =(ListView) root.findViewById(R.id.list);
+		
 		isload=false;
 		adaper = new ListCustomAdaper(getActivity(), 0, programs);
 		listView.addFooterView(mFooterView);
@@ -225,6 +232,8 @@ public class ProgramList  extends Fragment{
 				programs.addAll(result);
 			
 			mFooterView.setVisibility(View.GONE);
+			loading_screen.setVisibility(View.GONE);
+			main_content.setVisibility(View.VISIBLE);
 		//	adaper.addMoreItem(videos);
 			adaper.notifyDataSetChanged();
 			super.onPostExecute(result);
