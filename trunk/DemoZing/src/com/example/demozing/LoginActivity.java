@@ -52,9 +52,23 @@ public class LoginActivity extends FragmentActivity implements Listener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
-		
+		/* try {
+		        PackageInfo info = getPackageManager().getPackageInfo(
+		                "com.example.demozing", 
+		                PackageManager.GET_SIGNATURES);
+		        for (Signature signature : info.signatures) {
+		            MessageDigest md = MessageDigest.getInstance("SHA");
+		            md.update(signature.toByteArray());
+		            Log.d("kienbk1910", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+		            }
+		    } catch (NameNotFoundException e) {
+
+		    } catch (NoSuchAlgorithmException e) {
+
+		    }*/
 		super.onCreate(arg0);
 		// Add code to print out the key hash
+		
 		setContentView(R.layout.login);
 		logo=(ImageView)findViewById(R.id.logo);
 		LinearLayoutThatDetectsSoftKeyboard root= (LinearLayoutThatDetectsSoftKeyboard) findViewById(R.id.root);
