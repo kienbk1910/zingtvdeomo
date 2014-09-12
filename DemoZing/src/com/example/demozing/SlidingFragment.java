@@ -67,7 +67,7 @@ public class SlidingFragment extends Fragment {
 					long arg3) {
 				// TODO Auto-generated method stub
 				listView.setItemChecked(arg2, true);
-				if(categories.get(arg2).getType()==TypeCategory.CATEGORY && arg2!=1){
+				if(categories.get(arg2).getType()==TypeCategory.CATEGORY && arg2!=1 && arg2!=12){
 					switchFragment(new CategoryFragment());
 				//	closeMenu();
 					
@@ -76,9 +76,15 @@ public class SlidingFragment extends Fragment {
 					switchFragment(new MainFragment());
 				//	closeMenu();
 				}
+				if(arg2==12){
+					switchFragment(new SettingFragment());
+				//	closeMenu();
+				}
 				if(arg2==14){
 					logout();
 				}
+				
+				
 			}
 			
 		});
