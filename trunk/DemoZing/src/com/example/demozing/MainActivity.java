@@ -1,27 +1,29 @@
 package com.example.demozing;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.os.Handler;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.text.GetChars;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.SearchView.OnSuggestionListener;
 import android.widget.Toast;
+
+import com.example.demozing.provider.SuggestionAdapter;
+import com.example.demozing.provider.SuggestionProvider;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 @SuppressLint("NewApi")
 public class MainActivity extends SlidingFragmentActivity {
@@ -83,7 +85,50 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.main, menu);
+		 getMenuInflater().inflate(R.menu.main, menu);
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		final SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+				.getActionView();
+		searchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+			
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				String URL = SuggestionProvider.URL;
+				Uri friends = Uri.parse(URL);
+				Cursor c = getContentResolver().query(friends, null, null, null, "name");
+				searchView.setSuggestionsAdapter( new SuggestionAdapter(MainActivity.this, c));
+;				return true;
+			}
+		});
+		searchView.setOnSuggestionListener(new OnSuggestionListener() {
+			
+			@Override
+			public boolean onSuggestionSelect(int position) {
+				// TODO Auto-generated method stub
+
+				return false;
+			}
+			
+			@Override
+			public boolean onSuggestionClick(int position) {
+				// TODO Auto-generated method stub
+			Intent intent = new Intent(MainActivity.this, PlayVideoActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
+
+				return true;
+			}
+		});
 		return true;
 	}
 

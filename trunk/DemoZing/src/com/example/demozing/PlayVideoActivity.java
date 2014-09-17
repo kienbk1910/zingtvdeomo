@@ -3,25 +3,22 @@ package com.example.demozing;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.example.demozing.R;
-import com.example.demozing.dialog.ShareChooserDialog;
-
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.MenuCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,13 +32,19 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.SearchView.OnSuggestionListener;
 import android.widget.ShareActionProvider;
 import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.widget.TextView;
+
+import com.example.demozing.dialog.ShareChooserDialog;
+import com.example.demozing.provider.SuggestionAdapter;
+import com.example.demozing.provider.SuggestionProvider;
 
 /**
  * @u kienbk1910
@@ -407,10 +410,46 @@ public void onBackPressed() {
 		
 		// search action
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+		final SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getComponentName()));
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+			
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				String URL = SuggestionProvider.URL;
+				Uri friends = Uri.parse(URL);
+				Cursor c = getContentResolver().query(friends, null, null, null, "name");
+				searchView.setSuggestionsAdapter( new SuggestionAdapter(PlayVideoActivity.this, c));
+;				return true;
+			}
+		});
+		searchView.setOnSuggestionListener(new OnSuggestionListener() {
+			
+			@Override
+			public boolean onSuggestionSelect(int position) {
+				// TODO Auto-generated method stub
+				Toast.makeText(PlayVideoActivity.this,position, Toast.LENGTH_LONG).show();
+
+				return false;
+			}
+			
+			@Override
+			public boolean onSuggestionClick(int position) {
+				// TODO Auto-generated method stub
+			
+
+				return true;
+			}
+		});
 		return super.onCreateOptionsMenu(menu);
 	}
 
