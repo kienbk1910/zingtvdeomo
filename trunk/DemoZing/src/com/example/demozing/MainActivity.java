@@ -79,6 +79,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindScrollScale(0);
 		sm.setFadeDegree(0.25f);
+		getActionBar().setDisplayUseLogoEnabled(true);
 
 	}
 
@@ -91,6 +92,7 @@ public class MainActivity extends SlidingFragmentActivity {
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getComponentName()));
+		getActionBar().setIcon(R.drawable.logo);
 		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 			
 			@Override
@@ -253,6 +255,10 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 
 		return false;
+	}
+	public void setting(){
+		Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+		startActivity(intent);
 	}
 
 }

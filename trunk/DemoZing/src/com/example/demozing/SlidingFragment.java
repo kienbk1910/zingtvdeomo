@@ -77,7 +77,7 @@ public class SlidingFragment extends Fragment {
 				//	closeMenu();
 				}
 				if(arg2==12){
-					switchFragment(new SettingFragment());
+					setting();
 				//	closeMenu();
 				}
 				if(arg2==14){
@@ -111,6 +111,14 @@ public class SlidingFragment extends Fragment {
 			ra.logout();
 		}
 	}
+	private void setting(){
+		if (getActivity() == null)
+			return;
 
+		if (getActivity() instanceof MainActivity) {
+			MainActivity ra = (MainActivity) getActivity();
+			ra.setting();
+		}
+	}
 
 }
