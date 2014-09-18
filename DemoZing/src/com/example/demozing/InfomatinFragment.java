@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 /**
@@ -29,6 +31,7 @@ public class InfomatinFragment extends Fragment {
 	ProgressBar progressBar3;
 	boolean islike;
 	boolean isSubcribe;
+	private ImageButton download;
 
 	/*
 	 * (non-Javadoc)
@@ -43,6 +46,7 @@ public class InfomatinFragment extends Fragment {
 		View root = inflater.inflate(R.layout.infomation_frament, null);
 		rate = (DrawableAlignedButton) root.findViewById(R.id.rate);
 		like = (DrawableAlignedButton) root.findViewById(R.id.like);
+		download =(ImageButton)root.findViewById(R.id.btn_download);
 		subcribe = (DrawableAlignedButton) root.findViewById(R.id.subcribe);
 		progressBar1 = (ProgressBar) root.findViewById(R.id.progressBar);
 		progressBar2 = (ProgressBar) root.findViewById(R.id.progressBar1);
@@ -76,10 +80,20 @@ public class InfomatinFragment extends Fragment {
 				new SubcriabeTask().execute(isSubcribe);
 			}
 		});
+		download.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showAlertDialog();
+			}
+		});
 		return root;
 	}
-
-	public void showRateDialog() {
+    private void showAlertDialog(){
+    	
+    }
+	private void showRateDialog() {
 		RateDialog dialog = new RateDialog();
 		dialog.show(getFragmentManager(), "ratedialog");
 		dialog.setChangeRatingListener(new RateDialog.ChangeRatingListener() {
