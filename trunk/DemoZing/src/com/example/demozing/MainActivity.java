@@ -1,5 +1,7 @@
 package com.example.demozing;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -20,6 +23,8 @@ import android.widget.SearchView.OnQueryTextListener;
 import android.widget.SearchView.OnSuggestionListener;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
+import com.example.demozing.model.Video;
 import com.example.demozing.provider.SuggestionAdapter;
 import com.example.demozing.provider.SuggestionProvider;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -32,7 +37,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	private Context context;
 	boolean isOpen;
 	boolean doubleBackToExitPressedOnce;
-
+	private SearchView searchView;
+	Cursor c ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +94,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		 getMenuInflater().inflate(R.menu.main, menu);
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		final SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+		 searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getComponentName()));
@@ -104,11 +110,8 @@ public class MainActivity extends SlidingFragmentActivity {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// TODO Auto-generated method stub
-				String URL = SuggestionProvider.URL;
-				Uri friends = Uri.parse(URL);
-				Cursor c = getContentResolver().query(friends, null, null, null, "name");
-				searchView.setSuggestionsAdapter( new SuggestionAdapter(MainActivity.this, c));
-;				return true;
+				new searchTask().execute();
+				return true;
 			}
 		});
 		searchView.setOnSuggestionListener(new OnSuggestionListener() {
@@ -260,5 +263,32 @@ public class MainActivity extends SlidingFragmentActivity {
 		Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 		startActivity(intent);
 	}
+  class searchTask extends AsyncTask<String,String,String> {
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
+	@Override
+	protected String doInBackground(String... params) {
+		// TODO Auto-generated method stub
+		String URL = SuggestionProvider.URL;
+		Uri friends = Uri.parse(URL);
+		 c = getContentResolver().query(friends, null, null, null, "name");
+	
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
+	@Override
+	protected void onPostExecute(String result) {
+		// TODO Auto-generated method stub
+		searchView.setSuggestionsAdapter( new SuggestionAdapter(MainActivity.this, c));
+		super.onPostExecute(result);
+	}
+	  
+  }
 }
