@@ -2,5 +2,7 @@
 <resources>
  	<string name="app_id">572581506185480</string>
     <string name="app_name">Zing TV Fake</string>
- 
+    <string name="settting">CÀI ĐẶT</string>
+     <string name="language">Ngôn Ngữ</string>
+    <string name="curren_language">Tiếng Việt</string>
 </resources>

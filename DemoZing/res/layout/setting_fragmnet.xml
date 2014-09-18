@@ -10,7 +10,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CÀI ĐẶT"
+        android:text="@string/settting"
         android:textColor="@color/gray_text"
         android:textStyle="bold" />
 
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="Ngôn ngữ"
+            android:text="@string/language"
             android:textColor="@android:color/black"
             android:textStyle="italic"
             android:textSize="14sp" />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="Tiếng việt"
+            android:text="@string/curren_language"
              android:textSize="12sp" 
             android:textColor="@color/gray_text"
             android:textStyle="italic" />
