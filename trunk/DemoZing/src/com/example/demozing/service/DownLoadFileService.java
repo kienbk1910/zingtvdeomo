@@ -1,189 +1,159 @@
 package com.example.demozing.service;
 
-import com.example.demozing.MainActivity;
-import com.example.demozing.R;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Environment;
-import android.os.StatFs;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import java.net.*;
+import android.webkit.URLUtil;
+import com.example.config.CommonConstants;
 
-public class DownLoadFileService extends Service {
 
-	SharedPreferences preferences;
 
-	private static final String DOCUMENT_VIEW_STATE_PREFERENCES = "DjvuDocumentViewState";
-
-	private Looper mServiceLooper;
-	private ServiceHandler mServiceHandler;
-	private NotificationManager mNM;
-	String downloadUrl;
-	public static boolean serviceState = false;
-
-	// Handler that receives messages from the thread
-	private final class ServiceHandler extends Handler {
-		public ServiceHandler(Looper looper) {
-			super(looper);
-		}
-
-		@Override
-		public void handleMessage(Message msg) {
-			downloadFile();
-			showNotification("download", "VVS");
-			stopSelf(msg.arg1);
-		}
+public class DownLoadFileService extends IntentService{
+    private String link;
+    private File file;
+    private int percent =0;
+    private NotificationManager mNotificationManager;
+    private  NotificationCompat.Builder builder;
+	public DownLoadFileService() {
+		super("com.example.demozing.service");
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void onCreate() {
-		serviceState = true;
-		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		HandlerThread thread = new HandlerThread("ServiceStartArguments", 1);
-		thread.start();
-
-		// Get the HandlerThread's Looper and use it for our Handler
-		mServiceLooper = thread.getLooper();
-		mServiceHandler = new ServiceHandler(mServiceLooper);
-
+	protected void onHandleIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		Log.d("kienbk1910","start service");
+		link =intent.getStringExtra(CommonConstants.EXTRA_MESSAGE);
+		file =getFileName(link);
+		 createNotificatons();
+		 downloadFile();
 	}
-
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.d("SERVICE-ONCOMMAND", "onStartCommand");
-
-		Bundle extra = intent.getExtras();
-		if (extra != null) {
-			String downloadUrl = extra.getString("downloadUrl");
-			Log.d("URL", downloadUrl);
-
-			this.downloadUrl = downloadUrl;
-		}
-
-		Message msg = mServiceHandler.obtainMessage();
-		msg.arg1 = startId;
-		mServiceHandler.sendMessage(msg);
-
-		// If we get killed, after returning from here, restart
-		return START_STICKY;
+	public File getFileName(String url){
+		 File SDCardRoot =Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+	        //create a new file, specifying the path, and the filename
+	        //which we want to save the file as.
+		 String fileName = URLUtil.guessFileName(url, null, null);
+		  File file= new File(SDCardRoot,fileName);
+		 int i =1;
+		  while(file.exists()){
+			  file= new File(SDCardRoot,String.valueOf(i)+"_"+fileName);
+			  i++;
+			  Log.d("kienbk1910","start service"+file.getName());
+		  }
+			
+		return file;
 	}
-
-	@Override
-	public void onDestroy() {
-
-		Log.d("SERVICE-DESTROY", "DESTORY");
-		serviceState = false;
-		// Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+	private void createNotificatons(){
+			percent=0;
+		 builder =new NotificationCompat.Builder(this)
+	                .setSmallIcon(android.R.drawable.stat_sys_download)
+	                .setContentTitle(file.getName())
+	                .setContentText(String.format("%d%%", percent))
+	                .setProgress(100, 0, false)
+	               .setOngoing(true);
+		// .setDefaults(Notification.DEFAULT_ALL);
+		 mNotificationManager = (NotificationManager)
+	                getSystemService(NOTIFICATION_SERVICE);
+	        // Including the notification ID allows you to update the notification later on.
+	        mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
 	}
-
-	@Override
-	public IBinder onBind(Intent intent) {
-		// We don't provide binding, so return null
-		return null;
-	}
-
-	public void downloadFile() {
-
-		downloadFile(this.downloadUrl, "sbv");
-
-	}
-
-	public void showNotification(String message, String title) {
-		// In this sample, we'll use the same text for the ticker and the
-		// expanded notification
-		CharSequence text = message;
-
-		// Set the icon, scrolling text and timestamp
-		Notification notification = new Notification(
-				R.drawable.ic_action_download, "vvs",
-				System.currentTimeMillis());
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// The PendingIntent to launch our activity if the user selects this
-		// notification
-		PendingIntent contentIntent = PendingIntent.getActivity(
-				this.getBaseContext(), 0, intent,
-				PendingIntent.FLAG_CANCEL_CURRENT);
-
-		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, title, text, contentIntent);
-		// Send the notification.
-		// We use a layout id because it is a unique number. We use it later to
-		// cancel.
-		mNM.notify(R.string.app_name, notification);
-	}
-
-	public void downloadFile(String fileURL, String fileName) {
-
-		StatFs stat_fs = new StatFs(Environment.getExternalStorageDirectory()
-				.getPath());
-		double avail_sd_space = (double) stat_fs.getAvailableBlocks()
-				* (double) stat_fs.getBlockSize();
-		// double GB_Available = (avail_sd_space / 1073741824);
-		double MB_Available = (avail_sd_space / 10485783);
-		// System.out.println("Available MB : " + MB_Available);
-		Log.d("MB", "" + MB_Available);
+	private void updateProgress(int downloadedSize, int totalSize){
+    	builder.setProgress(totalSize, downloadedSize, false)
+    	  .setContentText(String.format("%d%%", percent));
+        mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
+    }
+    private void finshDownload(){
+        builder 
+                .setContentText(file.getName())
+                .setProgress(0, 0, false)
+                .setContentText("downloaded")
+               .setOngoing(false)
+                .setAutoCancel(true)
+        	.setDefaults(Notification.DEFAULT_ALL) ;
+        mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
+    }
+    private void erroDownload(){
+    	 builder 
+         .setContentText(file.getName())
+         .setProgress(100, percent, false)
+         .setContentText("download faild!")
+        .setOngoing(false)
+         .setAutoCancel(true)
+ 	.setDefaults(Notification.DEFAULT_ALL) ;
+ mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
+    }
+	private void downloadFile(){
 		try {
-			File root = new File(Environment.getExternalStorageDirectory()
-					+ "/vvveksperten");
-			if (root.exists() && root.isDirectory()) {
+	        //set the download URL, a url that points to a file on the internet
+	        //this is the file to be downloaded
+	        URL url = new URL(link);
 
-			} else {
-				root.mkdir();
-			}
-			Log.d("CURRENT PATH", root.getPath());
-			URL u = new URL(fileURL);
-			HttpURLConnection c = (HttpURLConnection) u.openConnection();
-			c.setRequestMethod("GET");
-			c.setDoOutput(true);
-			c.connect();
-			int fileSize = c.getContentLength() / 1048576;
-			Log.d("FILESIZE", "" + fileSize);
-			if (MB_Available <= fileSize) {
-				this.showNotification("erro", "eroo");
-				c.disconnect();
-				return;
-			}
+	        //create the new connection
+	        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-			FileOutputStream f = new FileOutputStream(new File(root.getPath(),
-					fileName));
+	        //set up some things on the connection
+	        urlConnection.setRequestMethod("GET");
+	        urlConnection.setDoOutput(true);
 
-			InputStream in = c.getInputStream();
+	        //and connect!
+	        urlConnection.connect();
+	        FileOutputStream fileOutput = new FileOutputStream(file);
 
-			byte[] buffer = new byte[1024];
-			int len1 = 0;
-			while ((len1 = in.read(buffer)) > 0) {
-				f.write(buffer, 0, len1);
-			}
-			f.close();
-			File file = new File(root.getAbsolutePath() + "/" + "some.pdf");
-			if (file.exists()) {
-				file.delete();
-				Log.d("FILE-DELETE", "YES");
-			} else {
-				Log.d("FILE-DELETE", "NO");
-			}
-			File from = new File(root.getAbsolutePath() + "/" + fileName);
-			File to = new File(root.getAbsolutePath() + "/" + "some.pdf");
+	        //this will be used in reading the data from the internet
+	        InputStream inputStream = urlConnection.getInputStream();
 
-		} catch (Exception e) {
-			Log.d("Downloader", e.getMessage());
+	        //this is the total size of the file
+	        int totalSize = urlConnection.getContentLength();
+	       
+	        //variable to store total downloaded bytes
+	        int downloadedSize = 0;
 
-		}
+	        //create a buffer...
+	        byte[] buffer = new byte[1024];
+	        int bufferLength = 0; //used to store a temporary size of the buffer
+	        //now, read through the input buffer and write the contents to the file
+	        while ( (bufferLength = inputStream.read(buffer)) > 0 ) {
+	                //add the data in the buffer to the file in the file output stream (the file on the sd card
+	                fileOutput.write(buffer, 0, bufferLength);
+	                //add up the size so we know how much is downloaded
+	                downloadedSize += bufferLength;
+	                //this is where you would do something to report the prgress, like this maybe
+	                if(downloadedSize*100 /totalSize - percent >5){
+	                	percent=downloadedSize*100 /totalSize;
+	                	updateProgress(downloadedSize, totalSize);
+	                }
+
+	        }
+	        //close the output stream when done
+	        fileOutput.close();
+	        finshDownload();
+	        return;
+
+	//catch some possible errors...
+	} catch (MalformedURLException e) {
+		 Log.d("kienbk1910", "erro");
+	        e.printStackTrace();
+	        Log.d("kienbk1910", "erro");
+	} catch (IOException e) {
+		 Log.d("kienbk1910", "erro1");
+	        e.printStackTrace();
 	}
+		erroDownload();
+		
+	}
+	
 }
