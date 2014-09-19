@@ -4,9 +4,14 @@
  */
 package com.example.demozing;
 
+import com.example.config.CommonConstants;
+import com.example.demozing.dialog.AlertDialog;
 import com.example.demozing.dialog.RateDialog;
+import com.example.demozing.service.DownLoadFileService;
 
 import android.R.bool;
+import android.content.Intent;
+import android.graphics.Bitmap.Config;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -91,6 +96,18 @@ public class InfomatinFragment extends Fragment {
 		return root;
 	}
     private void showAlertDialog(){
+    	AlertDialog dialog = AlertDialog.newAlertDialog("Xác Nhận", "Bạn muốn download Video này?");
+    	dialog.show(getFragmentManager(), "alert dialot");
+    	dialog.setAgreeListenerr(new AlertDialog.AgreeListener() {
+			
+			@Override
+			public void OnAgreeListener() {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), DownLoadFileService.class);
+		    	intent.putExtra(CommonConstants.EXTRA_MESSAGE, com.example.config.Config.URL_VIDEO_DEMO);
+		    	getActivity().startService(intent);
+			}
+		});
     	
     }
 	private void showRateDialog() {
