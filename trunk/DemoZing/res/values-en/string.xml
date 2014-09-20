@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    
     <string-array name="categories">
         <item>Home</item>
+        <item>My Upload</item>
         <item>TV Show</item>
         <item>Film</item>
         <item>Comedy</item>
@@ -13,12 +13,13 @@
         <item>Sports</item>
         <item>News- Event</item>
         <item>Setting</item>
-         <item>Application</item>
-          <item>Logout</item>
-           <item>Desktop</item>
+        <item>Application</item>
+        <item>Logout</item>
+        <item>Desktop</item>
     </string-array>
-<string name="settting">SETTING</string>
-     <string name="language">Language</string>
+
+    <string name="settting">SETTING</string>
+    <string name="language">Language</string>
     <string name="curren_language">English</string>
 
 </resources>

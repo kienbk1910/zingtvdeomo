@@ -52,6 +52,10 @@
             android:name="com.example.demozing.GroupActivity"
             android:label="" >
         </activity>
+          <activity
+            android:name="com.example.demozing.UploadActivity"
+            android:label="" >
+        </activity>
         <activity
             android:name="com.example.demozing.PlayVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

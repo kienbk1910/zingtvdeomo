@@ -11,6 +11,7 @@
     
     <string-array name="categories">
         <item>Trang chủ</item>
+       	<item>Video Của Tôi</item>
         <item>TV Show</item>
         <item>Phim</item>
         <item>Hai Kịch</item>
@@ -27,6 +28,7 @@
 
    <string-array name="categories_icon">
         <item>@drawable/ic_home</item>
+         <item>@android:drawable/ic_menu_upload</item>
         <item>@drawable/ic_tvshow</item>
         <item>@drawable/ic_film</item>
         <item>@drawable/ic_comedy</item>
