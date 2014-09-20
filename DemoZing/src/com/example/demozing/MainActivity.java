@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import android.widget.SearchView.OnSuggestionListener;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
+import com.example.config.Common;
+import com.example.demozing.model.Comment;
 import com.example.demozing.model.Video;
 import com.example.demozing.provider.SuggestionAdapter;
 import com.example.demozing.provider.SuggestionProvider;
@@ -32,7 +35,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 @SuppressLint("NewApi")
 public class MainActivity extends SlidingFragmentActivity {
-
+	public static final int PICK_FILE_UPLOAD=1910;
 	private Fragment mContent;
 	private Context context;
 	boolean isOpen;
@@ -291,4 +294,27 @@ public class MainActivity extends SlidingFragmentActivity {
 	}
 	  
   }
+  @Override
+protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+	// TODO Auto-generated method stub
+	  if (arg0 == PICK_FILE_UPLOAD) {
+          if (arg1 == RESULT_OK) {
+        	    Uri videoUri = arg2.getData();
+                 String filePath="";                      
+                if (videoUri != null && "content".equals(videoUri.getScheme())) {
+                    Cursor cursor = this.getContentResolver().query(videoUri, new String[] { android.provider.MediaStore.Images.ImageColumns.DATA }, null, null, null);
+                    cursor.moveToFirst();   
+                    filePath = cursor.getString(0);
+                    cursor.close();
+                }
+                else {
+                    filePath = videoUri.getPath();
+                }
+              	Intent intent = new Intent(this, UploadActivity.class);
+              	intent.putExtra(Common.URI_FILE_UPLOAD, filePath);
+  				startActivity(intent);
+          }
+      }
+	
+}
 }

@@ -49,10 +49,10 @@ public class SlidingFragment extends Fragment {
 		for(int i=0;i<title.length;i++){
 			Category category= new Category(imgs.getResourceId(i, 0),title[i] , TypeCategory.CATEGORY,true);
 			categories.add(category);
-			if(i==0){
+			if(i==1){
 				categories.add(new Category("Thể Loại", TypeCategory.GROUP));
 			}
-			if(i==8){
+			if(i==9){
 				categories.add(new Category("Công Cụ", TypeCategory.GROUP));
 			}
 			
@@ -67,7 +67,7 @@ public class SlidingFragment extends Fragment {
 					long arg3) {
 				// TODO Auto-generated method stub
 				listView.setItemChecked(arg2, true);
-				if(categories.get(arg2).getType()==TypeCategory.CATEGORY && arg2!=1 && arg2!=12){
+				if(categories.get(arg2).getType()==TypeCategory.CATEGORY && arg2!=2 &&arg2!=1 && arg2!=12){
 					switchFragment(new CategoryFragment());
 				//	closeMenu();
 					
@@ -83,7 +83,9 @@ public class SlidingFragment extends Fragment {
 				if(arg2==14){
 					logout();
 				}
-				
+				if(arg2==2){
+					switchFragment(new MyUpLoadFragment());
+				}
 				
 			}
 			
