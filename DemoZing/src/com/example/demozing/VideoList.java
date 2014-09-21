@@ -142,7 +142,7 @@ public class VideoList  extends Fragment{
 		        holder = new ViewHolder();
 		        convertView = inflater.inflate(R.layout.video_item, parent, false);
 		        holder.image=(ImageView) convertView.findViewById(R.id.image);
-		        holder.title=(TextView)convertView.findViewById(R.id.title);
+		        holder.title=(TextView)convertView.findViewById(R.id.titlevideo);
 		        holder.duration=(TextView)convertView.findViewById(R.id.duration);
 		        holder.progressBar=(ProgressBar)convertView.findViewById(R.id.progressBar1);
 		        holder.titleshow=(TextView)convertView.findViewById(R.id.show_title);

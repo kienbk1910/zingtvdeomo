@@ -32,7 +32,7 @@ public class SuggestionAdapter extends CursorAdapter{
 	public void bindView(final View arg0, final Context arg1, final Cursor arg2) {
 		// TODO Auto-generated method stub
 		ImageView image =(ImageView) arg0.findViewById(R.id.image);
-		TextView  title =(TextView) arg0.findViewById(R.id.title);
+		TextView  title =(TextView) arg0.findViewById(R.id.titlevideo);
 		title.setText(arg2.getString(arg2.getColumnIndex("title")));
 		arg0.setTag(arg2);
 		 AQuery query = new AQuery(arg1);

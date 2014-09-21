@@ -44,7 +44,7 @@ public class ProgramComponent extends RelativeLayout{
     private void init() {
         View root =inflate(getContext(), R.layout.program_component, this);
         image = (SquareImageView)root.findViewById(R.id.image);
-        title =(TextView)root.findViewById(R.id.title);
+        title =(TextView)root.findViewById(R.id.titlevideo);
     }
     public void  setImage(int resId){
     	image.setImageResource(resId);

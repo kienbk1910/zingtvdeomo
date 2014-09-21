@@ -70,6 +70,10 @@
             android:name="com.example.demozing.service.DownLoadFileService"
             android:label="DownLoadFileService" android:enabled="true">
           </service>
+            <service
+            android:name="com.example.demozing.service.UpLoadFileService"
+            android:label="UpLoadFileService" android:enabled="true">
+          </service>
     </application>
 
 </manifest>

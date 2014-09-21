@@ -56,14 +56,14 @@ public class SilidingMenuAdapter extends ArrayAdapter<Category> {
 		case MAIN:
 			convertView = inflater.inflate(R.layout.item_main_cate, parent,
 					false);
-			title = (TextView) convertView.findViewById(R.id.title);
+			title = (TextView) convertView.findViewById(R.id.titlevideo);
 			title.setText(category.getTitle());
 			break;
 
 		case GROUP:
 			convertView = inflater.inflate(R.layout.item_group, parent,
 					false);
-			title = (TextView) convertView.findViewById(R.id.title);
+			title = (TextView) convertView.findViewById(R.id.titlevideo);
 			title.setText(category.getTitle());
 			break;
 		case CATEGORY:
@@ -71,7 +71,7 @@ public class SilidingMenuAdapter extends ArrayAdapter<Category> {
 					false);
 			
 			ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
-			title = (TextView) convertView.findViewById(R.id.title);
+			title = (TextView) convertView.findViewById(R.id.titlevideo);
 
 			icon.setImageResource(category.getIcon());
 			title.setText(category.getTitle());

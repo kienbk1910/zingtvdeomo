@@ -34,4 +34,8 @@ public final class CommonConstants {
     public static final String EXTRA_MESSAGE= "com.example.demozing.service.EXTRA_MESSAGE";
     public static final String EXTRA_TIMER = "com.example.android.pingme.EXTRA_TIMER";
     public static final int NOTIFICATION_ID = 001;
+    public static final int UPLOAD_NOTIFICATION_ID = 002;
+    public static final String EXTRA_PATH_FILE = "com.example.demozing.service.downloadservice.EXTRA_PATH_FILE";
+    public static final String EXTRA_TITLE = "com.example.demozing.service.downloadservice.EXTRA_TITLE";
+    public static final String EXTRA_PATH_THUMS = "com.example.demozing.service.downloadservice.EXTRA_PATH_THUMS";
 }

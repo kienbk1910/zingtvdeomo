@@ -46,7 +46,7 @@ public class AlertDialog extends DialogFragment implements View.OnClickListener{
 		// TODO Auto-generated method stub
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		View view = inflater.inflate(R.layout.alertdialog, container);
-		TextView title =(TextView) view.findViewById(R.id.title);
+		TextView title =(TextView) view.findViewById(R.id.titlevideo);
 		TextView msg =(TextView) view.findViewById(R.id.msg);
 		title.setText(getArguments().getString(TITLE));
 		msg.setText(getArguments().getString(MSG));

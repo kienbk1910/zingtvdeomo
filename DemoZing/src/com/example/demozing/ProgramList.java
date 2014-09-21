@@ -147,7 +147,7 @@ public class ProgramList  extends Fragment{
 		        convertView = inflater.inflate(R.layout.item_listview, parent, false);
 		        holder.image = (ImageView) convertView.findViewById(R.id.image);
 		        holder.progressBar=(ProgressBar)convertView.findViewById(R.id.progressBar1);
-		        holder.title=(TextView)convertView.findViewById(R.id.title);
+		        holder.title=(TextView)convertView.findViewById(R.id.titlevideo);
 		        holder.category=(TextView)convertView.findViewById(R.id.category);
 		        holder.numberLike=(TextView)convertView.findViewById(R.id.number_view);
 		        convertView.setTag(holder);

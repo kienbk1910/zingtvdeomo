@@ -67,7 +67,7 @@ public class ProgramFragmentActivity extends FragmentActivity {
 		pager = (ViewPager) findViewById(R.id.pager);
 		program= (Program) getIntent().getSerializableExtra(Common.PROGRAM);
 		// header
-		title=(TextView)findViewById(R.id.title);
+		title=(TextView)findViewById(R.id.titlevideo);
 		image=(SquareImageView)findViewById(R.id.image);
 		category=(TextView)findViewById(R.id.type);
 		title.setText(program.getTitle());
