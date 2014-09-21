@@ -1,9 +1,12 @@
 package com.example.demozing.service;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -96,7 +99,7 @@ public class UpLoadFileService extends IntentService {
 
 		int bytesRead, bytesAvailable, bufferSize;
 		byte[] buffer;
-		int maxBufferSize = 1 * 1024 * 1024;
+		int maxBufferSize = 1024*1024;
 		File sourceFile = new File(pathFile);
 		String fileName = sourceFile.getPath();
 		File sourceImage = new File(imagePath);
@@ -119,7 +122,7 @@ public class UpLoadFileService extends IntentService {
 				conn.setDoInput(true); // Allow Inputs
 				conn.setDoOutput(true); // Allow Outputs
 				conn.setUseCaches(false); // Don't use a Cached Copy
-				conn.setChunkedStreamingMode(maxBufferSize);
+				conn.setChunkedStreamingMode(1024);
 				conn.setRequestMethod("POST");
 				conn.setRequestProperty("Connection", "Keep-Alive");
 				conn.setRequestProperty("ENCTYPE", "multipart/form-data");
@@ -142,7 +145,7 @@ public class UpLoadFileService extends IntentService {
 				dos.flush();
 				// write file
 				dos.writeBytes(twoHyphens + boundary + lineEnd);
-				dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
+				dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
 						+ fileName + "\"" + lineEnd);
 
 				dos.writeBytes(lineEnd);
@@ -196,15 +199,15 @@ public class UpLoadFileService extends IntentService {
 				while (bytesRead > 0) {
 
 					dos.write(buffer, 0, bytesRead);
-					uploadedSize += bytesRead;
+				//	uploadedSize += bytesRead;
 					bytesAvailable = imageInputStream.available();
 					bufferSize = Math.min(bytesAvailable, maxBufferSize);
 					bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
-					if (uploadedSize * 100 / totalSize - percent > 5) {
-						percent = uploadedSize * 100 / totalSize;
-						updateProgress(uploadedSize, totalSize);
-					}
+				//	if (uploadedSize * 100 / totalSize - percent > 5) {
+					//	percent = uploadedSize * 100 / totalSize;
+					//	updateProgress(uploadedSize, totalSize);
+				//	}
 				}
 				dos.flush();
 				// send multipart form data necesssary after file data...
@@ -219,10 +222,18 @@ public class UpLoadFileService extends IntentService {
 						+ serverResponseMessage + ": " + serverResponseCode);
 
 				if (serverResponseCode == 200) {
-					
-					
+					BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					String line = null;
+					while((line = in.readLine()) != null) {
+					  Log.d("kienbk19190", line);
+					}
+					 Log.d("kienbk19190", "___________________________");
+					in.close();
 					finshUpload();
 
+				}
+				else{
+					erroUpload();
 				}
 
 				// close the streams //
