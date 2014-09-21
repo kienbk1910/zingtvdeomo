@@ -28,15 +28,17 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imagevideo"
             android:text="TITLE" />
+
       	<EditText
-      	    android:textColor="@android:color/black"
-            android:id="@+id/textView2"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_alignBaseline="@+id/imagevideo"
-            android:layout_toRightOf="@+id/imagevideo" />
+      	    android:id="@+id/titlevideo"
+      	    android:layout_width="match_parent"
+      	    android:layout_height="wrap_content"
+      	    android:layout_alignBaseline="@+id/imagevideo"
+      	    android:layout_below="@+id/textView1"
+      	    android:layout_marginTop="5dp"
+      	    android:layout_toRightOf="@+id/imagevideo"
+      	    android:textColor="@android:color/black" />
+
     </RelativeLayout>
 
 

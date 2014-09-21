@@ -47,7 +47,7 @@ public class VideoComponent extends RelativeLayout{
     private void init() {
         View root =inflate(getContext(), R.layout.video_small_item, this);
         image = (VideoImageView)root.findViewById(R.id.image);
-        title =(TextView)root.findViewById(R.id.title);
+        title =(TextView)root.findViewById(R.id.titlevideo);
         subtitle=(TextView)root.findViewById(R.id.subtitle);
         progressBar =(ProgressBar)root.findViewById(R.id.progressBar);
     }

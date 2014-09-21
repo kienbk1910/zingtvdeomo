@@ -16,7 +16,7 @@
         android:src="@drawable/images1" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titlevideo"
         style="@style/category_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/titlevideo"
         android:layout_toRightOf="@id/image"
         android:text="Yêu Anh, Em nhé"
         android:textColor="@color/text_green"

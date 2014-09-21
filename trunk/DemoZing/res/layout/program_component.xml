@@ -10,7 +10,7 @@
                  android:scaleType="fitXY"
                 android:src="@drawable/default_program" />  
                 <TextView
-               	android:id="@+id/title"
+               	android:id="@+id/titlevideo"
                	android:padding="10dp"
                	android:background="@drawable/program_title_bg"
                 android:layout_width="match_parent"
