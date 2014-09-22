@@ -9,12 +9,12 @@ package com.example.config;
  *
  */
 public class Config {
-	public static final String URL_BANNER = "http://giaoducviet.vn/demozingtv/banner.php";
-	public static final String URL_PROGRAM = "http://giaoducviet.vn/demozingtv/program.php";
-	public static final String ULR_VIDEO = "http://giaoducviet.vn/demozingtv/video.php";
-	public static final String ULR_COMMENT ="http://giaoducviet.vn/demozingtv/comment.php";
-	public static final String URL_GROUP="http://giaoducviet.vn/demozingtv/group.php";
+	public static final String URL_BANNER = "http://rdc.vn/test/banner.php";
+	public static final String URL_PROGRAM = "http://rdc.vn/test/program.php";
+	public static final String ULR_VIDEO = "http://rdc.vn/test/video.php";
+	public static final String ULR_COMMENT ="http://rdc.vn/test/comment.php";
+	public static final String URL_GROUP="http://rdc.vn/test/group.php";
 	public static final String URL_VIDEO_DEMO="http://giaoducviet.vn/demozingtv/test.mp4";
-	//public static final String URL_UPLOAD_VIDEO="http://31.170.164.68/test.php";
-	public static final String URL_UPLOAD_VIDEO="http://rdc.vn/test/test.php";
+	//public static final String URL_UPLOAD_VIDEO="http://192.168.1.109:8080/upload/test/test.php";
+	public static final String URL_UPLOAD_VIDEO="http://rdc.vn/test/upload.php";
 }
