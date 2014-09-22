@@ -1,25 +1,25 @@
 package com.example.demozing.service;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.webkit.URLUtil;
-import android.widget.Toast;
 
 import com.example.config.CommonConstants;
 import com.example.config.Config;
@@ -46,7 +46,8 @@ public class UpLoadFileService extends IntentService {
 		imagePath = intent.getStringExtra(CommonConstants.EXTRA_PATH_THUMS);
 		Log.d("kienbk1910","imagefile:"+ imagePath);
 		createNotificatons();
-		uploadFile();
+		//uploadFile();
+		uploadFileMutiPart();
 	}
 
 	
@@ -87,172 +88,158 @@ public class UpLoadFileService extends IntentService {
 		mNotificationManager.notify(CommonConstants.NOTIFICATION_ID,
 				builder.build());
 	}
-
+	
 	private void uploadFile() {
+		 String boundary;
+		  String LINE_FEED = "\r\n";
+		 HttpURLConnection httpConn;
+		 String charset="UTF-8";
+		OutputStream outputStream;
+		 PrintWriter writer;
+		boundary = "===" + System.currentTimeMillis() + "===";
+		try{
+		URL url = new URL(Config.URL_UPLOAD_VIDEO);
+		httpConn = (HttpURLConnection) url.openConnection();
+		httpConn.setUseCaches(false);
+		httpConn.setDoOutput(true);	// indicates POST method
+		httpConn.setDoInput(true);
+		httpConn.setChunkedStreamingMode(1024);
+		httpConn.setRequestProperty("Content-Type",
+				"multipart/form-data; boundary=" + boundary);
+		httpConn.setRequestProperty("User-Agent", "CodeJava Agent");
+		httpConn.setRequestProperty("Test", "Bonjour");
+		outputStream = httpConn.getOutputStream();
+		writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),
+				true);
+		// and field text 
+		writer.append("--" + boundary).append(LINE_FEED);
+		writer.append("Content-Disposition: form-data; name=\"title\"")
+				.append(LINE_FEED);
+		writer.append("Content-Type: text/plain; charset=" + charset).append(
+				LINE_FEED);
+		writer.append(LINE_FEED);
+		writer.append(title).append(LINE_FEED);
+		writer.flush();
+		// add file
+		File video = new File(pathFile);
+		File image = new File(imagePath);
+		FileInputStream videoInput = new FileInputStream(video);
+		FileInputStream  imageInput = new FileInputStream(image);
+		int totalsize = videoInput.available()+imageInput.available();
+		int uploaded =0;
+		// write video
+		writer.append("--" + boundary).append(LINE_FEED);
+		writer.append(
+				"Content-Disposition: form-data; name=\"video\"; filename=\"" + video.getName() + "\"")
+				.append(LINE_FEED);
+		writer.append(
+				"Content-Type: "
+						+ URLConnection.guessContentTypeFromName(video.getName()))
+				.append(LINE_FEED);
+		writer.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
+		writer.append(LINE_FEED);
+		writer.flush();
 
-		String lineEnd = "\r\n";
-		String twoHyphens = "--";
-		String boundary = "*****";
 
-		HttpURLConnection conn = null;
-		DataOutputStream dos = null;
-
-		int bytesRead, bytesAvailable, bufferSize;
-		byte[] buffer;
-		int maxBufferSize = 1024*1024;
-		File sourceFile = new File(pathFile);
-		String fileName = sourceFile.getPath();
-		File sourceImage = new File(imagePath);
-		String imageName = sourceImage.getPath();
-		if (!sourceFile.isFile() || !sourceImage.isFile()) {
-
-			erroUpload();
-		} else {
-			try {
-
-				// open a URL connection to the Servlet
-				FileInputStream fileInputStream = new FileInputStream(
-						sourceFile);
-				FileInputStream imageInputStream = new FileInputStream(
-						sourceImage);
-				URL url = new URL(Config.URL_UPLOAD_VIDEO);
-
-				// Open a HTTP connection to the URL
-				conn = (HttpURLConnection) url.openConnection();
-				conn.setDoInput(true); // Allow Inputs
-				conn.setDoOutput(true); // Allow Outputs
-				conn.setUseCaches(false); // Don't use a Cached Copy
-				conn.setChunkedStreamingMode(1024);
-				conn.setRequestMethod("POST");
-				conn.setRequestProperty("Connection", "Keep-Alive");
-				conn.setRequestProperty("ENCTYPE", "multipart/form-data");
-				conn.setRequestProperty("Content-Type",
-						"multipart/form-data;boundary=" + boundary);
-				conn.setRequestProperty("uploaded_file", fileName);
-
-				dos = new DataOutputStream(conn.getOutputStream());
-				// post field
-				dos.writeBytes(twoHyphens + boundary + lineEnd);
-
-				dos.writeBytes("Content-Disposition: form-data; name=\""
-						+ "title" + "\"");
-				dos.writeBytes(lineEnd);
-				dos.writeBytes("Content-Type: text/plain; charset=" + "utf-8");
-				dos.writeBytes(lineEnd);
-				dos.writeBytes(lineEnd);
-				dos.writeBytes(title);
-				dos.writeBytes(lineEnd);
-				dos.flush();
-				// write file
-				dos.writeBytes(twoHyphens + boundary + lineEnd);
-				dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
-						+ fileName + "\"" + lineEnd);
-
-				dos.writeBytes(lineEnd);
-
-				// create a buffer of maximum size
-				bytesAvailable = fileInputStream.available();
-				int totalSize = bytesAvailable+imageInputStream.available();
-				int uploadedSize = 0;
-				Log.d("kienbk1910", "size" + bytesAvailable);
-				bufferSize = Math.min(bytesAvailable, maxBufferSize);
-				buffer = new byte[bufferSize];
-
-				// read file and write it into form...
-				bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-				while (bytesRead > 0) {
-
-					dos.write(buffer, 0, bytesRead);
-					uploadedSize += bytesRead;
-					bytesAvailable = fileInputStream.available();
-					bufferSize = Math.min(bytesAvailable, maxBufferSize);
-					bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-					if (uploadedSize * 100 / totalSize - percent > 5) {
-						percent = uploadedSize * 100 / totalSize;
-						updateProgress(uploadedSize, totalSize);
-					}
-				}
-
-				// send multipart form data necesssary after file data...
-				dos.writeBytes(lineEnd);
-				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-			
-				// write file
-				dos.writeBytes(twoHyphens + boundary + lineEnd);
-				dos.writeBytes("Content-Disposition: form-data; name=\"image\";filename=\""
-						+ imageName + "\"" + lineEnd);
-
-				dos.writeBytes(lineEnd);
-
-				// create a buffer of maximum size
-				bytesAvailable = imageInputStream.available();
-			
-				Log.d("kienbk1910", "size" + bytesAvailable);
-				bufferSize = Math.min(bytesAvailable, maxBufferSize);
-				buffer = new byte[bufferSize];
-
-				// read file and write it into form...
-				bytesRead = imageInputStream.read(buffer, 0, bufferSize);
-
-				while (bytesRead > 0) {
-
-					dos.write(buffer, 0, bytesRead);
-				//	uploadedSize += bytesRead;
-					bytesAvailable = imageInputStream.available();
-					bufferSize = Math.min(bytesAvailable, maxBufferSize);
-					bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-				//	if (uploadedSize * 100 / totalSize - percent > 5) {
-					//	percent = uploadedSize * 100 / totalSize;
-					//	updateProgress(uploadedSize, totalSize);
-				//	}
-				}
-				dos.flush();
-				// send multipart form data necesssary after file data...
-				dos.writeBytes(lineEnd);
-				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-
-				// Responses from the server (code and message)
-				int serverResponseCode = conn.getResponseCode();
-				String serverResponseMessage = conn.getResponseMessage();
-
-				Log.i("uploadFile", "HTTP Response is : "
-						+ serverResponseMessage + ": " + serverResponseCode);
-
-				if (serverResponseCode == 200) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-					String line = null;
-					while((line = in.readLine()) != null) {
-					  Log.d("kienbk19190", line);
-					}
-					 Log.d("kienbk19190", "___________________________");
-					in.close();
-					finshUpload();
-
-				}
-				else{
-					erroUpload();
-				}
-
-				// close the streams //
-				fileInputStream.close();
-				imageInputStream.close();
-				dos.flush();
-				dos.close();
-
-			} catch (MalformedURLException ex) {
-				erroUpload();
-				Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
-			} catch (Exception e) {
-
-				Log.e("Upload file to server Exception",
-						"Exception : " + e.getMessage(), e);
-				erroUpload();
+		byte[] buffer = new byte[4096];
+		int bytesRead = -1;
+		while ((bytesRead = videoInput.read(buffer)) != -1) {
+			outputStream.write(buffer, 0, bytesRead);
+			uploaded+=bytesRead;
+			Log.d("kienbk1910", ""+percent);
+			if(uploaded*100 /totalsize -percent>5){
+				percent=uploaded*100 /totalsize;
+			//	updateProgress(uploaded, totalsize);
 			}
+		}
+		outputStream.flush();
+		videoInput.close();
+		
+		writer.append(LINE_FEED);
+		writer.flush();
+		// write image
+		writer.append("--" + boundary).append(LINE_FEED);
+		writer.append(
+				"Content-Disposition: form-data; name=\"image\"; filename=\"" + image.getName() + "\"")
+				.append(LINE_FEED);
+		writer.append(
+				"Content-Type: "
+						+ URLConnection.guessContentTypeFromName(image.getName()))
+				.append(LINE_FEED);
+		writer.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
+		writer.append(LINE_FEED);
+		writer.flush();
 
-		} // End else block
+
+		
+		bytesRead = -1;
+		while ((bytesRead = imageInput.read(buffer)) != -1) {
+			outputStream.write(buffer, 0, bytesRead);
+			uploaded+=bytesRead;
+			Log.d("kienbk1910",""+uploaded+"_"+totalsize);
+			if( uploaded*100 /totalsize - percent>5){
+				percent=uploaded*100 /totalsize;
+			//	updateProgress(uploaded, totalsize);
+			}
+		}
+		outputStream.flush();
+		imageInput.close();
+		
+		writer.append(LINE_FEED);
+		writer.flush();
+		// finish
+		List<String> response = new ArrayList<String>();
+
+		writer.append(LINE_FEED).flush();
+		writer.append("--" + boundary + "--").append(LINE_FEED);
+		writer.close();
+
+		// checks server's status code first
+		int status = httpConn.getResponseCode();
+		if (status == HttpURLConnection.HTTP_OK) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					httpConn.getInputStream()));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+			
+				Log.d("kienbk1910", line);
+			}
+			reader.close();
+			httpConn.disconnect();
+		} else {
+			erroUpload();
+			throw new IOException("Server returned non-OK status: " + status);
+		}
+		}catch(Exception e){
+			erroUpload();
+		}
+		finshUpload();
 	}
+	public void uploadFileMutiPart(){
+		try {
+			MultipartUtility multipart = new MultipartUtility(Config.URL_UPLOAD_VIDEO, "UTF8");
+			
+			multipart.addHeaderField("User-Agent", "CodeJava");
+			multipart.addHeaderField("Test-Header", "Header-Value");
+			
+			multipart.addFormField("title",title);
+	
+			
+			multipart.addFilePart("video", new File(pathFile));
+			multipart.addFilePart("image",  new File(imagePath));
+
+			List<String> response = multipart.finish();
+			
+			System.out.println("SERVER REPLIED:");
+			
+			for (String line : response) {
+				Log.d("kienbk1901",line);
+			}
+		} catch (IOException ex) {
+			System.err.println(ex);
+		}
+		finshUpload();
+	}
+	
 
 }
