@@ -45,9 +45,10 @@ public class UpLoadFileService extends IntentService {
 		title = intent.getStringExtra(CommonConstants.EXTRA_TITLE);
 		imagePath = intent.getStringExtra(CommonConstants.EXTRA_PATH_THUMS);
 		Log.d("kienbk1910","imagefile:"+ imagePath);
+		Log.d("kienbk1910","file:"+ pathFile);
 		createNotificatons();
-		//uploadFile();
-		uploadFileMutiPart();
+		uploadFile();
+		//uploadFileMutiPart();
 	}
 
 	
@@ -103,7 +104,7 @@ public class UpLoadFileService extends IntentService {
 		httpConn.setUseCaches(false);
 		httpConn.setDoOutput(true);	// indicates POST method
 		httpConn.setDoInput(true);
-		httpConn.setChunkedStreamingMode(1024);
+	//	httpConn.setChunkedStreamingMode(1024);
 		httpConn.setRequestProperty("Content-Type",
 				"multipart/form-data; boundary=" + boundary);
 		httpConn.setRequestProperty("User-Agent", "CodeJava Agent");
@@ -149,7 +150,7 @@ public class UpLoadFileService extends IntentService {
 			Log.d("kienbk1910", ""+percent);
 			if(uploaded*100 /totalsize -percent>5){
 				percent=uploaded*100 /totalsize;
-			//	updateProgress(uploaded, totalsize);
+				updateProgress(uploaded, totalsize);
 			}
 		}
 		outputStream.flush();
@@ -179,7 +180,7 @@ public class UpLoadFileService extends IntentService {
 			Log.d("kienbk1910",""+uploaded+"_"+totalsize);
 			if( uploaded*100 /totalsize - percent>5){
 				percent=uploaded*100 /totalsize;
-			//	updateProgress(uploaded, totalsize);
+				updateProgress(uploaded, totalsize);
 			}
 		}
 		outputStream.flush();
@@ -215,14 +216,14 @@ public class UpLoadFileService extends IntentService {
 		}
 		finshUpload();
 	}
-	public void uploadFileMutiPart(){
+	/*public void uploadFileMutiPart(){
 		try {
 			MultipartUtility multipart = new MultipartUtility(Config.URL_UPLOAD_VIDEO, "UTF8");
 			
 			multipart.addHeaderField("User-Agent", "CodeJava");
 			multipart.addHeaderField("Test-Header", "Header-Value");
 			
-			multipart.addFormField("title",title);
+		//	multipart.addFormField("title",title);
 	
 			
 			multipart.addFilePart("video", new File(pathFile));
@@ -233,13 +234,14 @@ public class UpLoadFileService extends IntentService {
 			System.out.println("SERVER REPLIED:");
 			
 			for (String line : response) {
-				Log.d("kienbk1901",line);
+			//	Log.d("kienbk1910",line);
 			}
 		} catch (IOException ex) {
+			Log.d("kienbk1910","+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.err.println(ex);
 		}
 		finshUpload();
-	}
+	}*/
 	
 
 }
