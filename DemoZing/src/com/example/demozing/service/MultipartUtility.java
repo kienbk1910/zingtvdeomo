@@ -15,6 +15,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 /**
  * This utility class provides an abstraction layer for sending multipart HTTP
  * POST requests to a web server. 
@@ -47,8 +49,9 @@ public class MultipartUtility {
 		httpConn = (HttpURLConnection) url.openConnection();
 		httpConn.setUseCaches(false);
 		httpConn.setDoOutput(true);	// indicates POST method
+		httpConn.setChunkedStreamingMode(1024*1024);
 		httpConn.setDoInput(true);
-		httpConn.setChunkedStreamingMode(1024);
+		//httpConn.setChunkedStreamingMode(1024);
 		httpConn.setRequestProperty("Content-Type",
 				"multipart/form-data; boundary=" + boundary);
 		httpConn.setRequestProperty("User-Agent", "CodeJava Agent");
@@ -83,6 +86,7 @@ public class MultipartUtility {
 	public void addFilePart(String fieldName, File uploadFile)
 			throws IOException {
 		String fileName = uploadFile.getName();
+		Log.d("kienbk1910", fileName);
 		writer.append("--" + boundary).append(LINE_FEED);
 		writer.append(
 				"Content-Disposition: form-data; name=\"" + fieldName
@@ -97,12 +101,17 @@ public class MultipartUtility {
 		writer.flush();
 
 		FileInputStream inputStream = new FileInputStream(uploadFile);
+	
+			Log.d("kienbk1910",	""+	inputStream.available());
 		byte[] buffer = new byte[4096];
 		int bytesRead = -1;
 		while ((bytesRead = inputStream.read(buffer)) != -1) {
+			Log.d("kienbk1910", ""+bytesRead);
 			outputStream.write(buffer, 0, bytesRead);
+			outputStream.flush();
+			Log.d("kienbk1901","end");
 		}
-		outputStream.flush();
+		
 		inputStream.close();
 		
 		writer.append(LINE_FEED);
@@ -130,22 +139,24 @@ public class MultipartUtility {
 
 		writer.append(LINE_FEED).flush();
 		writer.append("--" + boundary + "--").append(LINE_FEED);
+		writer.flush();
 		writer.close();
 
 		// checks server's status code first
 		int status = httpConn.getResponseCode();
-		if (status == HttpURLConnection.HTTP_OK) {
+	//	if (status == HttpURLConnection.HTTP_OK) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					httpConn.getInputStream()));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				response.add(line);
+				Log.d("kienbk1910",line);
 			}
 			reader.close();
 			httpConn.disconnect();
-		} else {
-			throw new IOException("Server returned non-OK status: " + status);
-		}
+	//	} else {
+	//		throw new IOException("Server returned non-OK status: " + status);
+	//	}
 
 		return response;
 	}
