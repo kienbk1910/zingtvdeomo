@@ -15,6 +15,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -42,6 +43,9 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+import com.example.config.Common;
+import com.example.config.Config;
+import com.example.demozing.MainActivity.searchTask;
 import com.example.demozing.dialog.ShareChooserDialog;
 import com.example.demozing.provider.SuggestionAdapter;
 import com.example.demozing.provider.SuggestionProvider;
@@ -68,6 +72,9 @@ public class PlayVideoActivity extends FragmentActivity implements
 	TabsHostPagerAdapter adapter;
 	TabHost myTabHost;
 	int buffer=0;
+	String url;
+	private SearchView searchView;
+	Cursor c ;
 	private ShareActionProvider mShareActionProvider;
 boolean isfullScreen;
 	@Override
@@ -78,6 +85,9 @@ boolean isfullScreen;
 		getActionBar().setDisplayShowHomeEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		url =getIntent().getStringExtra(Common.URL_VIDEO);
+		if(url==null  || url.equals(""))
+			url =Config.URL_VIDEO_DEMO;
 		ArrayList<String> itemList = new ArrayList<String>();
 		itemList.add("240p");
 		itemList.add("360p");
@@ -187,7 +197,7 @@ boolean isfullScreen;
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(this, Uri
-					.parse("http://giaoducviet.vn/demozingtv/test.mp4"));
+					.parse(url));
 			player.setOnPreparedListener(this);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -329,7 +339,10 @@ boolean isfullScreen;
 public void onBackPressed() {
 	// TODO Auto-generated method stub
 	super.onBackPressed();
-    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+	resizeVideo();
+		//finish();
+		//overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+	
 
 }
 
@@ -410,7 +423,7 @@ public void onBackPressed() {
 		
 		// search action
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		final SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+		 searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getComponentName()));
@@ -425,10 +438,7 @@ public void onBackPressed() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// TODO Auto-generated method stub
-				String URL = SuggestionProvider.URL;
-				Uri friends = Uri.parse(URL);
-				Cursor c = getContentResolver().query(friends, null, null, null, "name");
-				searchView.setSuggestionsAdapter( new SuggestionAdapter(PlayVideoActivity.this, c));
+				new searchTask().execute();
 ;				return true;
 			}
 		});
@@ -482,4 +492,32 @@ public void onBackPressed() {
 		ShareChooserDialog dialog = new ShareChooserDialog();
 		dialog.show(getSupportFragmentManager(), "chooser");
 	}
+	 class searchTask extends AsyncTask<String,String,String> {
+
+			/* (non-Javadoc)
+			 * @see android.os.AsyncTask#doInBackground(Params[])
+			 */
+			@Override
+			protected String doInBackground(String... params) {
+				// TODO Auto-generated method stub
+				String URL = SuggestionProvider.URL;
+				Uri friends = Uri.parse(URL);
+				 c = getContentResolver().query(friends, null, null, null, "name");
+			
+				return null;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+			 */
+			@Override
+			protected void onPostExecute(String result) {
+				// TODO Auto-generated method stub
+				searchView.setSuggestionsAdapter( new SuggestionAdapter(PlayVideoActivity.this, c));
+				super.onPostExecute(result);
+			}
+			  
+		  }
 }

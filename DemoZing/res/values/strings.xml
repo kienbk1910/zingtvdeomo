@@ -5,4 +5,15 @@
     <string name="settting">CÀI ĐẶT</string>
      <string name="language">Ngôn Ngữ</string>
     <string name="curren_language">Tiếng Việt</string>
+    <!--  login  -->
+       <string name="pass">Mật Khẩu</string>
+       <string name="login_by_facebook">Đăng nhập bằng Facebook</string>
+       <string name="login">Đăng nhập</string>
+       <string name="login_by_zalo">Đăng nhập bằng Zalo</string>
+      <string name="registry">Đăng ký |Quên mật khẩu</string>
+      <string name="category">Thể loại</string>
+        <string name="tool">Thể loại</string>
+          <string name="video_hot">Video Mới Nổi Bật</string>
+           <string name="video_new">Tin Tức</string>
+           <string name="video_football">Bóng Đá</string>
 </resources>

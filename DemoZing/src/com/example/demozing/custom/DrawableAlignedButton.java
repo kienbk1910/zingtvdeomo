@@ -2,7 +2,7 @@
  *TODO
  * Jun 18, 2014
  */
-package com.example.demozing;
+package com.example.demozing.custom;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -48,7 +48,8 @@ protected void onDraw(Canvas canvas) {
     canvas.restore();
     canvas.save();
     int widthOfText = (int)getPaint().measureText(getText().toString());
-    int left = (getWidth()-widthOfText)/2 - mLeftDrawable.getIntrinsicWidth() - 2;
+ //   int left = (getWidth()-widthOfText)/2 - mLeftDrawable.getIntrinsicWidth() - 2;
+    int left = 10;
     canvas.translate(left, (getHeight()-mLeftDrawable.getIntrinsicHeight())/2);
     mLeftDrawable.draw(canvas);
     canvas.restore();

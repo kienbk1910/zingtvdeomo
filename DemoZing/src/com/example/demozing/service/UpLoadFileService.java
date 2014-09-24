@@ -28,6 +28,7 @@ public class UpLoadFileService extends IntentService {
 	private String pathFile;
 	private String imagePath;
 	private String title;
+	private String duration;
 	private int percent = 0;
 	private NotificationManager mNotificationManager;
 	private NotificationCompat.Builder builder;
@@ -44,6 +45,7 @@ public class UpLoadFileService extends IntentService {
 		pathFile = intent.getStringExtra(CommonConstants.EXTRA_PATH_FILE);
 		title = intent.getStringExtra(CommonConstants.EXTRA_TITLE);
 		imagePath = intent.getStringExtra(CommonConstants.EXTRA_PATH_THUMS);
+		duration = intent.getStringExtra(CommonConstants.EXTRA_DURATION);
 		Log.d("kienbk1910","imagefile:"+ imagePath);
 		Log.d("kienbk1910","file:"+ pathFile);
 		createNotificatons();
@@ -65,6 +67,7 @@ public class UpLoadFileService extends IntentService {
 		// later on.
 		mNotificationManager.notify(CommonConstants.UPLOAD_NOTIFICATION_ID,
 				builder.build());
+		
 	}
 
 	private void updateProgress(int downloadedSize, int totalSize) {
@@ -120,6 +123,15 @@ public class UpLoadFileService extends IntentService {
 				LINE_FEED);
 		writer.append(LINE_FEED);
 		writer.append(title).append(LINE_FEED);
+		writer.flush();
+		// and field text 
+		writer.append("--" + boundary).append(LINE_FEED);
+		writer.append("Content-Disposition: form-data; name=\"duration\"")
+						.append(LINE_FEED);
+		writer.append("Content-Type: text/plain; charset=" + charset).append(
+						LINE_FEED);
+		writer.append(LINE_FEED);
+		writer.append(duration).append(LINE_FEED);
 		writer.flush();
 		// add file
 		File video = new File(pathFile);

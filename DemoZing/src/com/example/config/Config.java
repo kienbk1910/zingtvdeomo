@@ -17,4 +17,5 @@ public class Config {
 	public static final String URL_VIDEO_DEMO="http://giaoducviet.vn/demozingtv/test.mp4";
 	//public static final String URL_UPLOAD_VIDEO="http://192.168.2.103/test/upload.php";
 	public static final String URL_UPLOAD_VIDEO="http://rdc.vn/test/upload.php";
+	public static final String URL_VIDEO_MY_UPLOAD="http://rdc.vn/test/myupload.php";
 }

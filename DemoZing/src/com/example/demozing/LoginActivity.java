@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import com.facebook.*;
 import com.facebook.Session.StatusCallback;
 import com.facebook.model.*;
+import com.example.demozing.custom.DrawableAlignedButton;
 import com.example.demozing.custom.LinearLayoutThatDetectsSoftKeyboard;
 import  com.example.demozing.custom.LinearLayoutThatDetectsSoftKeyboard.Listener;;
 
@@ -73,7 +74,7 @@ public class LoginActivity extends FragmentActivity implements Listener{
 		logo=(ImageView)findViewById(R.id.logo);
 		LinearLayoutThatDetectsSoftKeyboard root= (LinearLayoutThatDetectsSoftKeyboard) findViewById(R.id.root);
 		root.setListener(this);
-		Button facebook = (Button) findViewById(R.id.facebook);
+		DrawableAlignedButton facebook = (DrawableAlignedButton) findViewById(R.id.facebook);
 		context=this;
 		facebook.setOnClickListener(new View.OnClickListener() {
 			
