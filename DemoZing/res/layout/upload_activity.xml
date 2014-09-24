@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@color/gray_text"
+    android:background="#E6E6E6"
+    android:orientation="vertical"
     android:padding="10dp">
     <RelativeLayout
      android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             android:src="@drawable/ztv_logo" />
 
         <TextView
+            android:paddingLeft="5dp"
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +32,7 @@
             android:text="TITLE" />
 
       	<EditText
+      	    android:paddingLeft="5dp"
       	    android:id="@+id/titlevideo"
       	    android:layout_width="match_parent"
       	    android:layout_height="wrap_content"
@@ -39,7 +42,22 @@
       	    android:layout_toRightOf="@+id/imagevideo"
       	    android:textColor="@android:color/black" />
 
+      	<TextView
+      	    android:id="@+id/duration"
+      	    android:textColor="@android:color/white"
+      	    android:textStyle="bold"
+      	    android:layout_width="wrap_content"
+      	    android:layout_height="wrap_content"
+      	    android:layout_alignBottom="@+id/imagevideo"
+      	    android:layout_toLeftOf="@+id/titlevideo"
+      	    android:text="20:30" />
+
     </RelativeLayout>
-
-
+  	 <RelativeLayout
+  	     android:layout_marginTop="5dp"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" 
+     android:background="@android:color/white" 
+     android:padding="5dp" >
+ 	</RelativeLayout>
 </LinearLayout>

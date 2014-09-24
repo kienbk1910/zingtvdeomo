@@ -35,6 +35,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 @SuppressLint("NewApi")
 public class MainActivity extends SlidingFragmentActivity {
+	private boolean  upload;
 	public static final int PICK_FILE_UPLOAD=1910;
 	private Fragment mContent;
 	private Context context;
@@ -47,6 +48,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsive_content_frame);
 		context = this;
+		upload =false;
 		// check if the content frame contains the menu frame
 		if (findViewById(R.id.menu_frame) == null) {
 			setBehindContentView(R.layout.menu_frame);
@@ -96,6 +98,9 @@ public class MainActivity extends SlidingFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		 getMenuInflater().inflate(R.menu.main, menu);
+		 MenuItem uploadItem = menu.findItem(R.id.upload);
+		 uploadItem.setVisible(upload);
+		 // search
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		 searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
@@ -145,12 +150,21 @@ public class MainActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			toggle();
-
+	    break;
+		case R.id.upload:
+			  chooseFile();
+		 break;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
-
+	public void chooseFile(){
+		 Intent intent = new Intent();
+		 intent.setType("video/*");
+		 intent.setAction(Intent.ACTION_PICK);
+		 startActivityForResult(intent, MainActivity.PICK_FILE_UPLOAD);
+		
+	}
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -180,11 +194,20 @@ public class MainActivity extends SlidingFragmentActivity {
 	public void switchContent(final Fragment fragment) {
 
 		mContent = fragment;
-		if (hasConnection())
+		if (hasConnection()){
+			if ( fragment instanceof MyUpLoadFragment){
+				
+				upload=true;
+			}
+			else{
+				upload =false;
+			}
+			invalidateOptionsMenu() ;
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.content_frame, fragment).commit();
 
-		else {
+		}else {
+			
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.content_frame, new DisConectFragment())
 					.commit();
