@@ -21,5 +21,15 @@
     <string name="settting">SETTING</string>
     <string name="language">Language</string>
     <string name="curren_language">English</string>
-
+        <!--  login  -->
+    <string name="pass">Password</string>
+    <string name="login_by_facebook">Login by Facebook</string>
+    <string name="login">Login</string>
+    <string name="login_by_zalo">Login by Zalo</string>
+    <string name="registry">Registry|Forgot password</string>
+    <string name="category">Category</string>
+    <string name="tool">Tool</string>
+   	<string name="video_hot">Video Hot</string>
+   	  <string name="video_new">News</string>
+   	    <string name="video_football">Football</string>
 </resources>

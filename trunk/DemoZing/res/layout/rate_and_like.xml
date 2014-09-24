@@ -27,7 +27,7 @@
                     android:layout_gravity="center"
                     android:indeterminateDrawable="@drawable/progress_bar" />
 
-                <com.example.demozing.DrawableAlignedButton
+                <com.example.demozing.custom.DrawableAlignedButton
                     android:id="@+id/rate"
                      android:textColor="#AFAFAE"
                     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_gravity="center"
                     android:indeterminateDrawable="@drawable/progress_bar" />
 
-                <com.example.demozing.DrawableAlignedButton
+                <com.example.demozing.custom.DrawableAlignedButton
                      android:textColor="#AFAFAE"
                     android:id="@+id/like"
                     android:layout_width="match_parent"

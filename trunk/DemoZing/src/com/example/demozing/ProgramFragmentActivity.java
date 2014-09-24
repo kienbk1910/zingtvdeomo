@@ -9,6 +9,7 @@ import com.example.config.Common;
 import com.example.demozing.InfomatinFragment.LikeTask;
 import com.example.demozing.InfomatinFragment.RatingTask;
 import com.example.demozing.InfomatinFragment.SubcriabeTask;
+import com.example.demozing.custom.DrawableAlignedButton;
 import com.example.demozing.custom.SquareImageView;
 import com.example.demozing.dialog.RateDialog;
 import com.example.demozing.model.Program;

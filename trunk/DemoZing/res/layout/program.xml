@@ -48,7 +48,7 @@
                 android:layout_gravity="center"
                 android:indeterminateDrawable="@drawable/progress_bar" />
 
-            <com.example.demozing.DrawableAlignedButton
+            <com.example.demozing.custom.DrawableAlignedButton
                 android:id="@+id/subcribe"
                 android:layout_width="100dp"
                 android:layout_height="30dp"

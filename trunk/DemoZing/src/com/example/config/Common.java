@@ -12,4 +12,5 @@ public class Common {
  public static  String PROGRAM="progam";
  public static String VIDEO="video";
  public static String URI_FILE_UPLOAD="uri_file_upload";
+ public static String URL_VIDEO="url_video";
 }

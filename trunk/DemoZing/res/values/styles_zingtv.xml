@@ -34,10 +34,12 @@
         <item name="android:activatedBackgroundIndicator">@drawable/apptheme_activated_background_holo_light</item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
         <item name="android:ratingBarStyle">@style/RatingBarAppTheme</item>
+          <item name="android:progressBarStyle">@style/progress_ztv</item>
         <item name="android:buttonStyle">@style/zm_button</item>
         <item name="android:imageButtonStyle">@style/zm_ImageButtonAppTheme</item>
          <item name="android:dialogTheme">@style/CustomDialogTheme</item>
          <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+
     </style>
 
     <style name="Theme.Zingtv1" parent="@style/Theme.Zingtv">
@@ -126,5 +128,9 @@
     <item name="android:textColor">@color/text_green</item>
     <item name="android:textSize">20sp</item>
 
+</style>
+<style name="progress_ztv" parent="android:Widget.Holo.Light.ProgressBar">
+      <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_bar</item>
 </style>
 </resources>

@@ -79,6 +79,7 @@ public class UploadActivity extends FragmentActivity{
 			intent.putExtra(CommonConstants.EXTRA_PATH_FILE, pathFile);
 			intent.putExtra(CommonConstants.EXTRA_TITLE, title.getText().toString());
 			intent.putExtra(CommonConstants.EXTRA_PATH_THUMS, getPicPatFormBitMap(thumb));
+			intent.putExtra(CommonConstants.EXTRA_DURATION, duration.getText());
 			startService(intent);
 			finish();
 			break;

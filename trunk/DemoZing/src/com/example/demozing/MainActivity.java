@@ -1,5 +1,9 @@
 package com.example.demozing;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -142,6 +146,7 @@ public class MainActivity extends SlidingFragmentActivity {
 				return true;
 			}
 		});
+		
 		return true;
 	}
 
@@ -333,9 +338,23 @@ protected void onActivityResult(int arg0, int arg1, Intent arg2) {
                 else {
                     filePath = videoUri.getPath();
                 }
-              	Intent intent = new Intent(this, UploadActivity.class);
-              	intent.putExtra(Common.URI_FILE_UPLOAD, filePath);
-  				startActivity(intent);
+              
+                try {
+                	  File file = new File(filePath);
+					FileInputStream videoInput = new FileInputStream(file);
+	
+					if(videoInput.available()>30*1024){
+						Toast.makeText(this, "Sorry!File size must be less than 30M ", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					Intent intent = new Intent(this, UploadActivity.class);
+	              	intent.putExtra(Common.URI_FILE_UPLOAD, filePath);
+	  				startActivity(intent);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+              
           }
       }
 	

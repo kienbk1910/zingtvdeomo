@@ -38,4 +38,5 @@ public final class CommonConstants {
     public static final String EXTRA_PATH_FILE = "com.example.demozing.service.downloadservice.EXTRA_PATH_FILE";
     public static final String EXTRA_TITLE = "com.example.demozing.service.downloadservice.EXTRA_TITLE";
     public static final String EXTRA_PATH_THUMS = "com.example.demozing.service.downloadservice.EXTRA_PATH_THUMS";
+    public static final String EXTRA_DURATION = "com.example.demozing.service.downloadservice.DURATION";
 }

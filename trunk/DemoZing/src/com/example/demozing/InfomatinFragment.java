@@ -5,6 +5,7 @@
 package com.example.demozing;
 
 import com.example.config.CommonConstants;
+import com.example.demozing.custom.DrawableAlignedButton;
 import com.example.demozing.dialog.AlertDialog;
 import com.example.demozing.dialog.RateDialog;
 import com.example.demozing.service.DownLoadFileService;
