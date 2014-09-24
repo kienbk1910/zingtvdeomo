@@ -9,8 +9,6 @@ import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -22,7 +20,7 @@ import android.view.ViewGroup;
  *
  */
 public class CategoryFragment extends Fragment implements ActionBar.TabListener{
-	 private ViewPager viewPager;
+	 	private ViewPager viewPager;
 	    private TabsPagerAdapter mAdapter;
 	    private ActionBar actionBar;
 	    private String[] tabs = { "Chương Trình", "Video"};

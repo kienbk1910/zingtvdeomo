@@ -16,24 +16,9 @@ public class MyUpLoadFragment extends Fragment{
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View root = inflater.inflate(R.layout.my_upload_fragment, null);
-		Button upload =(Button)root.findViewById(R.id.upload);
-		upload.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				chooseFile();
 		
-			}
-		});
 		return root;
 	}
-	public void chooseFile(){
-		 Intent intent = new Intent();
-		 intent.setType("video/*");
-		 intent.setAction(Intent.ACTION_PICK);
-		 getActivity().startActivityForResult(intent, MainActivity.PICK_FILE_UPLOAD);
-		
-	}
+	
 
 }

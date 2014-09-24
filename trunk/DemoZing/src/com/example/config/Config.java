@@ -15,6 +15,6 @@ public class Config {
 	public static final String ULR_COMMENT ="http://rdc.vn/test/comment.php";
 	public static final String URL_GROUP="http://rdc.vn/test/group.php";
 	public static final String URL_VIDEO_DEMO="http://giaoducviet.vn/demozingtv/test.mp4";
-	//public static final String URL_UPLOAD_VIDEO="http://192.168.1.109:8080/upload/test/test.php";
+	//public static final String URL_UPLOAD_VIDEO="http://192.168.2.103/test/upload.php";
 	public static final String URL_UPLOAD_VIDEO="http://rdc.vn/test/upload.php";
 }
