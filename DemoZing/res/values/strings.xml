@@ -20,7 +20,8 @@
     <string name="show">Chương Trình</string>
     <string name="content">Nội  Dung</string>
     <string name="comment">Bình Luận</string>
-   <string name="infomation">Thông Tin</string>
+    <string name="infomation">Thông Tin</string>
     <string name="relative">Quan Hệ</string>
-      <string name="views">Lượt Xem</string>
+    <string name="views">Lượt Xem</string>
+     <string name="exit_app">Nhấn phím back lần nữa để thoái</string>
 </resources>

@@ -245,7 +245,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 
 		this.doubleBackToExitPressedOnce = true;
-		Toast.makeText(this, "Nhấn phím Back lần nữa để thoát",
+		Toast.makeText(this, getResources().getString(R.string.exit_app),
 				Toast.LENGTH_SHORT).show();
 
 		new Handler().postDelayed(new Runnable() {

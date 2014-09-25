@@ -43,8 +43,8 @@ public class IndexPointSlider extends View{
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		paint= new Paint();
-		mpaint = new Paint();
+		paint= new Paint(Paint.ANTI_ALIAS_FLAG);
+		mpaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paint.setColor(Color.WHITE);
 		mpaint.setColor(Color.parseColor("#7ebd03"));
 	}
