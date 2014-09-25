@@ -114,8 +114,8 @@ public class ProgramFragmentActivity extends FragmentActivity {
 
 		myTabHost.setup();
 
-		setupTab(new TextView(this), "Nội dung");
-		setupTab(new TextView(this), "Bình luận");
+		setupTab(new TextView(this),getResources().getString(R.string.content));
+		setupTab(new TextView(this), getResources().getString(R.string.comment));
 		myTabHost.setCurrentTab(1);
 		myTabHost.setCurrentTab(0);
 		adapter = new TabsProgramAdapter(getSupportFragmentManager());

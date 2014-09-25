@@ -159,7 +159,7 @@ public class VideoList  extends Fragment{
 		    holder.title.setText(video.getTitle());
 		    holder.titleshow.setText(video.getShowTitle());
 		    holder.duration.setText(durationToString(video.getDuration()));
-		    holder.viewNumber.setText(String.valueOf(video.getViewNumber())+" lượt xem");
+		    holder.viewNumber.setText(String.valueOf(video.getViewNumber())+" "+context.getResources().getString(R.string.views));
 		    return convertView;
 		}
 

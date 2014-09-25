@@ -8,7 +8,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                  android:scaleType="fitXY"
-                android:src="@drawable/default_program" />  
+                android:background="@drawable/default_program" />  
                 <TextView
                	android:id="@+id/titlevideo"
                	android:padding="10dp"

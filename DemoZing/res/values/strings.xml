@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
- 	<string name="app_id">572581506185480</string>
+
+    <string name="app_id">572581506185480</string>
     <string name="app_name">Zing TV Fake</string>
     <string name="settting">CÀI ĐẶT</string>
-     <string name="language">Ngôn Ngữ</string>
+    <string name="language">Ngôn Ngữ</string>
     <string name="curren_language">Tiếng Việt</string>
-    <!--  login  -->
-       <string name="pass">Mật Khẩu</string>
-       <string name="login_by_facebook">Đăng nhập bằng Facebook</string>
-       <string name="login">Đăng nhập</string>
-       <string name="login_by_zalo">Đăng nhập bằng Zalo</string>
-      <string name="registry">Đăng ký |Quên mật khẩu</string>
-      <string name="category">Thể loại</string>
-        <string name="tool">Thể loại</string>
-          <string name="video_hot">Video Mới Nổi Bật</string>
-           <string name="video_new">Tin Tức</string>
-           <string name="video_football">Bóng Đá</string>
+    <!-- login -->
+    <string name="pass">Mật Khẩu</string>
+    <string name="login_by_facebook">Đăng nhập bằng Facebook</string>
+    <string name="login">Đăng nhập</string>
+    <string name="login_by_zalo">Đăng nhập bằng Zalo</string>
+    <string name="registry">Đăng ký |Quên mật khẩu</string>
+    <string name="category">Thể loại</string>
+    <string name="tool">Thể loại</string>
+    <string name="video_hot">Video Mới Nổi Bật</string>
+    <string name="video_new">Tin Tức</string>
+    <string name="video_football">Bóng Đá</string>
+    <string name="show">Chương Trình</string>
+    <string name="content">Nội  Dung</string>
+    <string name="comment">Bình Luận</string>
+   <string name="infomation">Thông Tin</string>
+    <string name="relative">Quan Hệ</string>
+      <string name="views">Lượt Xem</string>
 </resources>

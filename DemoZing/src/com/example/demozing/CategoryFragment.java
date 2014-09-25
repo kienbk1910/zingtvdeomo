@@ -23,7 +23,7 @@ public class CategoryFragment extends Fragment implements ActionBar.TabListener{
 	 	private ViewPager viewPager;
 	    private TabsPagerAdapter mAdapter;
 	    private ActionBar actionBar;
-	    private String[] tabs = { "Chương Trình", "Video"};
+
 	    
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +34,7 @@ public class CategoryFragment extends Fragment implements ActionBar.TabListener{
 		 actionBar = getActivity().getActionBar();
 		 actionBar.removeAllTabs();
 	        mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager());
-	 
+	 String[] tabs = { getResources().getString(R.string.show), "Video"};
 	        viewPager.setAdapter(mAdapter);
 	        viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 				
