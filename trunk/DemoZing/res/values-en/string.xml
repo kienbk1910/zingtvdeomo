@@ -38,4 +38,5 @@
    <string name="infomation">Information</string>
      <string name="relative">Relative</string>
       <string name="views">View</string>
+       <string name="exit_app">Back again to exit</string>
 </resources>
