@@ -105,9 +105,9 @@ boolean isfullScreen;
 
 		myTabHost.setup();
 
-		setupTab(new TextView(this), "Thông tin");
-		setupTab(new TextView(this), "Liên quan");
-		setupTab(new TextView(this), "Bình luận");
+		setupTab(new TextView(this), getResources().getString(R.string.infomation));
+		setupTab(new TextView(this),getResources().getString(R.string.relative));
+		setupTab(new TextView(this), getResources().getString(R.string.comment));
 		isfullScreen=false;
 		myTabHost.setCurrentTab(1);
 		myTabHost.setCurrentTab(0);
@@ -339,8 +339,8 @@ boolean isfullScreen;
 public void onBackPressed() {
 	// TODO Auto-generated method stub
 	super.onBackPressed();
-	resizeVideo();
-		//finish();
+//	resizeVideo();
+		finish();
 		//overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 	
 

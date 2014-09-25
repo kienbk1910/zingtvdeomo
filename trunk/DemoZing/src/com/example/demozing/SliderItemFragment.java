@@ -66,7 +66,7 @@ public class SliderItemFragment extends Fragment {
 		Video video = (Video) getArguments().getSerializable(VIDEO);
 		AQuery aq = new AQuery(getActivity());
 		aq.id(imageView).progress(root.findViewById(R.id.progressBar))
-				.image(video.getUrlImage(), true, false);
+				.image(video.getUrlImage(), true, true);
 		return root;
 	}
 

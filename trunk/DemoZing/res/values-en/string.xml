@@ -21,7 +21,7 @@
     <string name="settting">SETTING</string>
     <string name="language">Language</string>
     <string name="curren_language">English</string>
-        <!--  login  -->
+    <!-- login -->
     <string name="pass">Password</string>
     <string name="login_by_facebook">Login by Facebook</string>
     <string name="login">Login</string>
@@ -29,7 +29,13 @@
     <string name="registry">Registry|Forgot password</string>
     <string name="category">Category</string>
     <string name="tool">Tool</string>
-   	<string name="video_hot">Video Hot</string>
-   	  <string name="video_new">News</string>
-   	    <string name="video_football">Football</string>
+    <string name="video_hot">Video Hot</string>
+    <string name="video_new">News</string>
+    <string name="video_football">Football</string>
+    <string name="show">Show</string>
+    <string name="content">Content</string>
+    <string name="comment">Comment</string>
+   <string name="infomation">Information</string>
+     <string name="relative">Relative</string>
+      <string name="views">View</string>
 </resources>

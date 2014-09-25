@@ -148,7 +148,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			@Override
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
-				Log.d("kienbk1910", "selected" + arg0);
+			
 				pointSlider.setCurrentPoint(arg0);
 			}
 
@@ -163,7 +163,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 			public void onPageScrollStateChanged(int arg0) {
 				// TODO Auto-generated method stub
 				// pointSlider.setCurrentPoint(arg0);
-				Log.d("kienbk1910", "selected--" + arg0);
+			
 			}
 		});
 		mPager.setOnTouchListener(new View.OnTouchListener() {

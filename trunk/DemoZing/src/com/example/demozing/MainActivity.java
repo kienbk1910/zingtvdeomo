@@ -343,7 +343,7 @@ protected void onActivityResult(int arg0, int arg1, Intent arg2) {
                 	  File file = new File(filePath);
 					FileInputStream videoInput = new FileInputStream(file);
 	
-					if(videoInput.available()>30*1024){
+					if(videoInput.available()>(30*1024*1024)){
 						Toast.makeText(this, "Sorry!File size must be less than 30M ", Toast.LENGTH_SHORT).show();
 						return;
 					}
